@@ -1,0 +1,24 @@
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 2rem;
+}
+
+.search {
+    width: 100%;
+}
+
+.search input[type=search] {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    color: #827A8E;
+    border-radius: .3rem;
+    outline: none;
+    border: none;
+    font-size: 13px;
+    font-weight: medium;
+    background-image: url("../../assets/search-icon.svg");
+    background-repeat: no-repeat;
+    background-position: 2rem 1rem;
+}
