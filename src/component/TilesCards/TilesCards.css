@@ -1,0 +1,32 @@
+.movie {
+    margin: 0 2rem;
+}
+
+.movie-grid--group {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(7, 1fr);
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Enable snapping to each grid item */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+}
+
+.movie-tiles {
+    flex: 0 0 auto;
+    min-width: 200px; /* Set minimum width for grid items */
+    /*height: 200px; !* Set height for grid items *!*/
+    /*background-color: #f2f2f2;*/
+    padding: 20px;
+    margin-right: 10px; /* Add margin between grid items */
+    scroll-snap-align: start;
+}
+
+.movie-tiles img {
+    width: 100%;
+}
+.mySwiper {
+    z-index: -1;
+}
+@media (min-width: 760px) {
+
+}

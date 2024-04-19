@@ -1,0 +1,69 @@
+/* Bem Principle aanhouden */
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.error-wrapper {
+    gap: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.error-img {
+    display: flex;
+    justify-content: center;
+}
+.error .error-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 3rem;
+    gap: 2rem;
+    border-top: .2rem solid #E62020;
+}
+
+.error .error-title {
+    font-size: 3rem;
+}
+
+.error-intro p {
+    font-size: 2rem;
+}
+
+.error-intro .error-button {
+    padding: 1rem;
+    background: none;
+    border-radius: 2rem;
+    outline: none;
+    border: .1rem solid #E62020;
+    color: #E62020;
+    font-size: 1.4rem;
+    cursor: pointer;
+
+}
+
+@media (min-width: 720px) {
+
+    .error {
+        padding: 10rem;
+    }
+    .error-wrapper {
+        flex-direction: row;
+
+    }
+    .error .error-intro {
+        display: flex;
+        padding-left: 3rem;
+        border-left: .2rem solid #E62020;
+        border-top: none;
+    }
+
+    .error .error-button {
+        font-size: 2rem;
+        width: 50%;
+    }
+}

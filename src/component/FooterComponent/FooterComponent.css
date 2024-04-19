@@ -1,0 +1,15 @@
+footer {
+    background-color: #000000;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    padding: 2rem 0;
+    margin: 0 2rem;
+
+}
