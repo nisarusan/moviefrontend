@@ -1,19 +1,25 @@
+/* SearchComp.css */
+
+/* Container for the search input and autocomplete dropdown */
 .search-wrapper {
     display: flex;
     justify-content: center;
-    margin: 2rem 2rem;
+    margin: 2rem;
+    position: relative; /* Position relative for positioning the autocomplete results */
 }
 
+/* Search form */
 .search {
     width: 100%;
 }
 
-.search input[type=search] {
+/* Search input */
+.search-input {
     width: 100%;
     padding: 1rem;
     text-align: center;
-    color: #827A8E;
-    border-radius: .3rem;
+    color: #827a8e;
+    border-radius: 0.3rem; /* Default border-radius for all corners */
     outline: none;
     border: none;
     font-size: 13px;
@@ -21,4 +27,60 @@
     background-image: url("../../assets/search-icon.svg");
     background-repeat: no-repeat;
     background-position: 2rem 1rem;
+}
+
+/* Remove bottom border-radius when autocomplete dropdown is visible */
+.search-input.autocomplete-visible {
+    border-bottom-left-radius: 0; /* Remove bottom-left border-radius */
+    border-bottom-right-radius: 0; /* Remove bottom-right border-radius */
+}
+
+
+/* Autocomplete dropdown */
+.autocomplete-results {
+    position: absolute;
+    top: 100%; /* Position dropdown below the input */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for dropdown */
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    z-index: 10; /* Ensure dropdown appears above other content */
+}
+
+/* List of autocomplete results */
+.autocomplete-results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Autocomplete result item */
+.autocomplete-results ul li {
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    color: #000000;
+}
+
+/* Hover effect on autocomplete result item */
+.autocomplete-results ul li:hover {
+    color: #E62020;
+    background-color: #f5f5f5; /* Light gray background on hover */
+}
+
+/* Movie image next to title */
+.movie-image {
+    width: 40px; /* Adjust width of movie image */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Spacing between image and title */
+}
+
+/* Movie title */
+.movie-title {
+    font-size: 14px;
+    font-weight: bold;
 }
