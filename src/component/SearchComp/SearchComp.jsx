@@ -10,7 +10,7 @@ function AutocompleteSearch() {
     const autocompleteRef = useRef(null);
 
     const handleInputChange = async (event) => {
-        const { value } = event.target;
+        const { value } = event.currentTarget;
         setSearchTerm(value);
 
         try {
@@ -32,6 +32,12 @@ function AutocompleteSearch() {
         }
     };
 
+    const handleResultClick = (movie) => {
+        console.log('Selected movie:', movie);
+        setShowAutocomplete(false);
+        setSearchTerm('');
+    };
+
     const handleClickOutside = (event) => {
         if (
             inputRef.current &&
@@ -39,46 +45,53 @@ function AutocompleteSearch() {
             autocompleteRef.current &&
             !autocompleteRef.current.contains(event.target)
         ) {
-            // Click occurred outside of both the input field and the autocomplete container
+            setSearchTerm('');
             setShowAutocomplete(false);
-            setSearchTerm(''); // Reset the input value to empty string
         }
     };
 
     useEffect(() => {
-        // Attach event listener to handle clicks outside of the input field and autocomplete container
         document.addEventListener('mousedown', handleClickOutside);
-
         return () => {
-            // Cleanup: remove event listener on component unmount
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, []); // Empty dependency array ensures useEffect runs only once
+    }, []);
 
     return (
         <div className="search-wrapper">
-            <form className="search">
-                <input
-                    type="search"
-                    name="search"
-                    title="search"
-                    aria-label="search"
-                    placeholder="Welke film bent u op zoek?"
-                    value={searchTerm}
-                    onChange={handleInputChange}
-                    ref={inputRef}
-                    className={`search-input ${showAutocomplete ? 'autocomplete-visible' : ''}`}
-                    autoComplete="off"
-                />
-            </form>
+            <input
+                type="search"
+                name="search"
+                title="search"
+                aria-label="search"
+                placeholder="Welke film bent u op zoek?"
+                value={searchTerm}
+                onChange={handleInputChange}
+                ref={inputRef}
+                className={`search-input ${showAutocomplete ? 'autocomplete-visible' : ''}`}
+                autoComplete="off"
+            />
+            {searchTerm && (
+                <span
+                    className="search-clear"
+                    onClick={() => setSearchTerm('')}
+                    title="Clear search"
+                >
+                    &times;
+                </span>
+            )}
             {showAutocomplete && autocompleteResults.length > 0 && (
                 <div ref={autocompleteRef} className="autocomplete-results">
                     <ul>
                         {autocompleteResults.map((movie) => (
-                            <li key={movie.id} onClick={() => console.log(movie)}>
-                                {movie.poster_path && (
+                            <li
+                                key={movie.id}
+                                onClick={() => handleResultClick(movie)}
+                                className="autocomplete-item"
+                            >
+                                {movie.imageUrl && (
                                     <img
-                                        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                                        src={`https://image.tmdb.org/t/p/w500/${movie.imageUrl}`}
                                         alt={movie.title}
                                         className="autocomplete-image"
                                     />

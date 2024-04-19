@@ -17,9 +17,10 @@ export default function SliderSwiper(props) {
     return (
         <>
             <Swiper navigation={true} slidesPerView={3}   spaceBetween={120} modules={[Navigation]} breakpoints={{
+
                 768: {
                     slidesPerView: 6,
-                    spaceBetween: 0
+                    spaceBetween: -20
                 },
             }} className="mySwiper" >
                 {moviesMap.map(({title, releaseDate: release_date, imageUrl: poster_path}, index) => (
