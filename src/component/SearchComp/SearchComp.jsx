@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './SearchComp.css';
 import axios from 'axios';
+import './SearchComp.css';
 
-function AutocompleteSearch() {
+function AutocompleteSearch({ onMovieSelect }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [autocompleteResults, setAutocompleteResults] = useState([]);
     const [showAutocomplete, setShowAutocomplete] = useState(false);
@@ -34,6 +34,7 @@ function AutocompleteSearch() {
 
     const handleResultClick = (movie) => {
         console.log('Selected movie:', movie);
+        onMovieSelect(movie.id); // Pass the selected movie id to the parent component
         setShowAutocomplete(false);
         setSearchTerm('');
     };

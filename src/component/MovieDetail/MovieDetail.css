@@ -1,0 +1,22 @@
+.movie-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 2rem;
+}
+
+.movie-detail .movie-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.movie-img img {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .movie-detail {
+    flex-direction: row;
+    }
+}
