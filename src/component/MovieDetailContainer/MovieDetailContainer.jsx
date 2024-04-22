@@ -1,11 +1,13 @@
 import React from 'react';
-import { useMovieContext } from '../../context/MovieContext.jsx';
+import { useParams } from 'react-router-dom';
 import MovieDetail from '../../component/MovieDetail/MovieDetail.jsx';
 
 function MovieDetailContainer() {
-    const { selectedMovieId } = useMovieContext();
+    const { id } = useParams();
 
-    return selectedMovieId ? <MovieDetail movieId={selectedMovieId} /> : null;
+    const movieId = parseInt(id);
+
+    return <MovieDetail movieId={movieId} />;
 }
 
 export default MovieDetailContainer;

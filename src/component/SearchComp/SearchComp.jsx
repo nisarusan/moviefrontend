@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './SearchComp.css';
 import { useMovieContext } from '../../context/MovieContext.jsx';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for React Router v6
 
 function SearchComp() {
     const { handleMovieSelection } = useMovieContext();
     const [searchTerm, setSearchTerm] = useState('');
     const [autocompleteResults, setAutocompleteResults] = useState([]);
     const [showAutocomplete, setShowAutocomplete] = useState(false);
-
+    const navigate = useNavigate(); // Use useNavigate for navigation
 
     const handleInputChange = async (event) => {
         const { value } = event.currentTarget;
@@ -37,8 +38,8 @@ function SearchComp() {
         handleMovieSelection(movieId); // Update selected movie ID via context
         setSearchTerm('');
         setShowAutocomplete(false);
+        navigate(`/movie/${movieId}`); // Navigate to the movie detail page
     };
-
 
     return (
         <div className="search-wrapper">

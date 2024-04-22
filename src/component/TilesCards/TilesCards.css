@@ -1,9 +1,19 @@
 .movie {
     margin: 0 2rem;
+    color: #FFFFFF;
+}
+
+.movie a {
+    color: #FFFFFF;
+}
+
+.movie a:active {
+    color: #FFFFFF;
 }
 
 .movie-grid--group {
     display: grid;
+    color: #FFFFFF;
     gap: 1rem;
     grid-template-columns: repeat(7, 1fr);
     overflow-x: auto; /* Enable horizontal scrolling */

@@ -1,14 +1,16 @@
 import movieLogo from '../../assets/movieflix_logo.svg';
 import './HeaderMovie.css';
+import { Link } from 'react-router-dom';
+
 
 function HeaderMovie() {
     return (
         <>
             <header>
                 <div className="header-wrapper">
-                    <div>
-                        <img src={movieLogo} alt=""/>
-                    </div>
+                    <Link to="/" style={{ textDecoration: 'none' }}>
+                        <img src={movieLogo} alt="Movie Logo" />
+                    </Link>
 
                     <nav>
                         <input id="menu-toggle" type="checkbox"/>
