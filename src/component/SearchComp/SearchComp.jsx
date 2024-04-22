@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import './SearchComp.css';
+import { useMovieContext } from '../../context/MovieContext.jsx';
 
-function AutocompleteSearch({ onMovieSelect }) {
+function SearchComp() {
+    const { handleMovieSelection } = useMovieContext();
     const [searchTerm, setSearchTerm] = useState('');
     const [autocompleteResults, setAutocompleteResults] = useState([]);
     const [showAutocomplete, setShowAutocomplete] = useState(false);
-    const inputRef = useRef(null);
-    const autocompleteRef = useRef(null);
+
 
     const handleInputChange = async (event) => {
         const { value } = event.currentTarget;
@@ -32,31 +33,12 @@ function AutocompleteSearch({ onMovieSelect }) {
         }
     };
 
-    const handleResultClick = (movie) => {
-        console.log('Selected movie:', movie);
-        onMovieSelect(movie.id); // Pass the selected movie id to the parent component
-        setShowAutocomplete(false);
+    const handleResultClick = (movieId) => {
+        handleMovieSelection(movieId); // Update selected movie ID via context
         setSearchTerm('');
+        setShowAutocomplete(false);
     };
 
-    const handleClickOutside = (event) => {
-        if (
-            inputRef.current &&
-            !inputRef.current.contains(event.target) &&
-            autocompleteRef.current &&
-            !autocompleteRef.current.contains(event.target)
-        ) {
-            setSearchTerm('');
-            setShowAutocomplete(false);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
 
     return (
         <div className="search-wrapper">
@@ -65,29 +47,19 @@ function AutocompleteSearch({ onMovieSelect }) {
                 name="search"
                 title="search"
                 aria-label="search"
-                placeholder="Welke film bent u op zoek?"
+                placeholder="Search for a movie..."
                 value={searchTerm}
                 onChange={handleInputChange}
-                ref={inputRef}
                 className={`search-input ${showAutocomplete ? 'autocomplete-visible' : ''}`}
                 autoComplete="off"
             />
-            {searchTerm && (
-                <span
-                    className="search-clear"
-                    onClick={() => setSearchTerm('')}
-                    title="Clear search"
-                >
-                    &times;
-                </span>
-            )}
             {showAutocomplete && autocompleteResults.length > 0 && (
-                <div ref={autocompleteRef} className="autocomplete-results">
+                <div className="autocomplete-results">
                     <ul>
                         {autocompleteResults.map((movie) => (
                             <li
                                 key={movie.id}
-                                onClick={() => handleResultClick(movie)}
+                                onClick={() => handleResultClick(movie.id)}
                                 className="autocomplete-item"
                             >
                                 {movie.imageUrl && (
@@ -107,4 +79,4 @@ function AutocompleteSearch({ onMovieSelect }) {
     );
 }
 
-export default AutocompleteSearch;
+export default SearchComp;

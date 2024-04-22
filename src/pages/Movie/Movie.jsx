@@ -7,7 +7,6 @@ function Movie() {
     const handleMovieSelection = (movieId) => {
         setSelectedMovieId(movieId);
     };
-xs
 return (
     <>
             <h2>Movie Search</h2>
