@@ -15,17 +15,68 @@ header {
     margin: 0 2rem;
 }
 
-/*nav {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
+nav {
+    display: flex;
+    align-items: center;
+}
 
-/*.nav-menu {*/
-/*    display: flex;*/
-/*    gap: 2rem;*/
-/*    list-style: none;*/
-/*    flex-grow: 1;*/
-/*}*/
+.menu ul {
+    display: none;
+}
+
+/* Desktop Profile Styles */
+.desktop-profile {
+    display: flex; /* Show by default */
+    align-items: center;
+    position: relative;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dropdown {
+    position: absolute;
+    top: 50px; /* Adjust as needed */
+    right: 0;
+    display: block;
+}
+
+.dropbtn {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
 
 
 /* --- Menu CSS Hamburger */
@@ -92,7 +143,22 @@ header {
     transform: rotate(-405deg);
 }
 
+.mobile-menu {
+    display: none; /* Hide by default on desktop */
+}
+
 @media (max-width: 700px) {
+
+    .main-menu {
+        display: none;
+    }
+    .desktop-login {
+        display: none; /* Hide on mobile */
+    }
+    .mobile-menu {
+        display: block; /* Hide by default on desktop */
+    }
+
     .menu-button-container {
         display: flex;
     }
