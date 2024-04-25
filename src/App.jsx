@@ -6,6 +6,8 @@ import SearchComp from './component/SearchComp/SearchComp.jsx';
 import MovieDetailContainer from './component/MovieDetailContainer/MovieDetailContainer.jsx';
 import { MovieProvider } from './context/MovieContext.jsx';
 import TilesCards from './component/TilesCards/TilesCards.jsx';
+import Register from "./pages/Register/Register.jsx";
+import Login from "./pages/Login/Login.jsx";
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +35,8 @@ function App() {
                     <Routes>
                         <Route path="/" element={<TilesCards />} />
                         <Route path="/movies" element={<TilesCards />} />
+                        <Route path="/register" element={<Register/>} />
+                        <Route path="/login" element={<Login/>} />
                         <Route path="/movie/:id" element={<MovieDetailContainer />} />
                     </Routes>
                 )}
