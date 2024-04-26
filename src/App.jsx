@@ -12,6 +12,12 @@ import Login from "./pages/Login/Login.jsx";
 function App() {
     const [isLoading, setIsLoading] = useState(true);
 
+    const handleLogout = () => {
+        // Implement logout functionality (e.g., clear session, redirect to login)
+        localStorage.removeItem('jwtToken'); // Clear JWT token from localStorage
+        // Additional logout logic (e.g., redirect to login page)
+    };
+
     // Simulating a loading delay with useEffect
     useEffect(() => {
         const timer = setTimeout(() => {

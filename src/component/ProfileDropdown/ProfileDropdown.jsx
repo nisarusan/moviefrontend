@@ -9,21 +9,17 @@ const ProfileDropdown = ({ onLogout }) => {
         setShowDropdown(!showDropdown);
     };
 
-
     return (
         <div className="profile-dropdown-container">
             <div className="avatar" onClick={toggleDropdown}>
-                <img src={Avatar} alt="User Avatar"/>
+                <img src={Avatar} alt="User Avatar" />
                 <button className="profile-button">Profile</button>
-                {showDropdown ? (
-                    <div className="arrow-up"></div>
-                ) : (
-                    <div className="arrow-down"></div>
-                )}
+                {showDropdown ? <div className="arrow-up"></div> : <div className="arrow-down"></div>}
             </div>
             {showDropdown && (
                 <div className="dropdown-content">
-                    <a href="/favorites">Favorite</a>
+                    <a href="/favorites">Favorites</a>
+                    {/* Call onLogout function when the button is clicked */}
                     <button onClick={onLogout}>Log out</button>
                 </div>
             )}
