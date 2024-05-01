@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Avatar from '../../assets/avatar.png';
 import './ProfileDropdown.css';
+import {useAuthentication} from "../../provider/AuthenticationProvider/AuthenticationProvider.jsx";
 
-const ProfileDropdown = ({ onLogout }) => {
+const ProfileDropdown = () => {
     const [showDropdown, setShowDropdown] = useState(false);
-
+    const { isLoggedIn, handleLogout } = useAuthentication();
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
@@ -20,7 +21,7 @@ const ProfileDropdown = ({ onLogout }) => {
                 <div className="dropdown-content">
                     <a href="/favorites">Favorites</a>
                     {/* Call onLogout function when the button is clicked */}
-                    <button onClick={onLogout}>Log out</button>
+                    <button onClick={handleLogout}>Log out</button>
                 </div>
             )}
         </div>

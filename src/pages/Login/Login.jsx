@@ -7,15 +7,15 @@ function Login() {
         password: ''
     });
 
-    useEffect(() => {
-        // Check if a JWT token exists in localStorage
-        const jwtToken = localStorage.getItem('jwtToken');
-
-        if (jwtToken) {
-            // Redirect to dashboard if token exists
-            window.location.href = '/dashboard';
-        }
-    }, []); // Empty dependency array ensures this effect runs only once on component mount
+    // useEffect(() => {
+    //     // Check if a JWT token exists in localStorage
+    //     const jwtToken = localStorage.getItem('jwtToken');
+    //
+    //     if (jwtToken) {
+    //         // Redirect to dashboard if token exists
+    //         window.location.href = '/profile';
+    //     }
+    // }, []); // Empty dependency array ensures this effect runs only once on component mount
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -41,7 +41,7 @@ function Login() {
                 localStorage.setItem('jwtToken', jwt);
 
                 // Redirect to dashboard upon successful login
-                window.location.href = '/dashboard';
+                window.location.href = '/profile';
             } else {
                 const errorData = await response.json();
                 alert(`Login failed: ${errorData.message}`);

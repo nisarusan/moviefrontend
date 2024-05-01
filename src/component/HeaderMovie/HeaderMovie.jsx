@@ -6,28 +6,16 @@ import Avatar from '../../assets/avatar.png';
 import DesktopMenu from "../DesktopMenu/DesktopMenu.jsx";
 import DesktopLogin from "../DesktopLogin/DesktopLogin.jsx";
 import MobileMenu from "../MobileMenu/MobileMenu.jsx";
+import {useAuthentication} from "../../provider/AuthenticationProvider/AuthenticationProvider.jsx";
 
 function HeaderMovie() {
     const [showDropdown, setShowDropdown] = useState(false); // Track dropdown visibility
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Track user login state
+    const { isLoggedIn, handleLogout } = useAuthentication();
 
-    const handleLogout = () => {
-        // Implement logout functionality here
-        setIsLoggedIn(false);
-        // Optionally, perform additional logout actions (e.g., clearing local storage)
-        localStorage.removeItem('jwtToken');
-    };
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown); // Toggle dropdown visibility
     };
 
-    useEffect(() => {
-        // Check if JWT token exists in local storage
-        const jwtToken = localStorage.getItem('jwtToken');
-        if (jwtToken) {
-            setIsLoggedIn(true);
-        }
-    }, []);
     return (
         <header className="header">
             <div className="header-wrapper">
@@ -38,7 +26,7 @@ function HeaderMovie() {
                 <DesktopMenu isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
                 {/* Desktop Login Button (Show when not logged in) */}
                 {!isLoggedIn && <DesktopLogin />}
-               <MobileMenu isLoggedIn={isLoggedIn} />
+                <MobileMenu isLoggedIn={isLoggedIn} />
 
             </div>
         </header>

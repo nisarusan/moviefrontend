@@ -1,12 +1,10 @@
 import React from 'react';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import './DesktopLogin.css';
+import {useAuthentication} from "../../provider/AuthenticationProvider/AuthenticationProvider.jsx";
 
-const DesktopLogin = ({ isLoggedIn }) => {
-    const handleLogout = () => {
-        // Implement logout functionality
-        console.log('Logging out...');
-    };
+const DesktopLogin = () => {
+    const { isLoggedIn, handleLogout } = useAuthentication();
 
     return (
         <div className="desktop-login-container">

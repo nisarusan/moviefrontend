@@ -1,5 +1,9 @@
 import {useRef, useState} from 'react';
 import Movie1 from '../../src/assets/movie-1.png';
+import PlusIcon from '../../src/assets/add-list.svg?react';
+import EyeIcon from '../../src/assets/see-eye.svg?react';
+import EyeSeen from '../../src/assets/eyes-seen.svg?react';
+import Heart from '../../src/assets/heart.svg?react';
 
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -11,7 +15,7 @@ import 'swiper/css/navigation';
 
 // import required modules
 import {Navigation} from 'swiper/modules';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import {Link} from 'react-router-dom'; // Import Link from react-router-dom
 
 
 export default function SliderSwiper(props) {
@@ -35,20 +39,24 @@ export default function SliderSwiper(props) {
                                     <h1>{title}</h1>
                                     <h1>{release_date.substring(0, 4)}</h1>
                                     <p>Rating: <span>7.4</span></p>
-                                    <div className="movie-add">
-                                        <span className="movie-heart"></span>
-                                        <div className="movie-add--list">
-                                    <span className="movie--add">
-                                    </span>
-                                            <span className="movie--see">
-                                    </span>
-                                        </div>
-                                    </div>
                                 </div>
                             </article>
                         </Link>
+                                    <div className="movie-add">
+                                        <span className="movie-heart">
+                                            <Heart />
+                                        </span>
+                                        <div className="movie-add--list">
+                                    <span className="movie--add">
+                                        <PlusIcon />
+                                    </span>
+                                            <span className="movie--see">
+                                                <EyeSeen />
+                                    </span>
+                                        </div>
+                                    </div>
                     </SwiperSlide>
-                    ))}
+                ))}
             </Swiper>
         </>
     );

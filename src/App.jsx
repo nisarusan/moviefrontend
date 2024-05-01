@@ -1,54 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom';
 import HeaderMovie from './component/HeaderMovie/HeaderMovie.jsx';
 import FooterComponent from './component/FooterComponent/FooterComponent.jsx';
 import SearchComp from './component/SearchComp/SearchComp.jsx';
 import MovieDetailContainer from './component/MovieDetailContainer/MovieDetailContainer.jsx';
-import { MovieProvider } from './context/MovieContext.jsx';
+import {MovieProvider} from './context/MovieContext.jsx';
 import TilesCards from './component/TilesCards/TilesCards.jsx';
 import Register from "./pages/Register/Register.jsx";
 import Login from "./pages/Login/Login.jsx";
+import HomePage from "./pages/HomePage/HomePage.jsx";
+import {AuthenticationProvider} from "./provider/AuthenticationProvider/AuthenticationProvider.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 
 function App() {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // Assuming you have loading state
 
     const handleLogout = () => {
-        // Implement logout functionality (e.g., clear session, redirect to login)
-        localStorage.removeItem('jwtToken'); // Clear JWT token from localStorage
-        // Additional logout logic (e.g., redirect to login page)
+        // Perform logout actions here (e.g., clear authentication state)
+        setIsLoggedIn(false);
+        localStorage.removeItem('jwtToken'); // Clear token from localStorage
+        // Additional cleanup tasks if needed
     };
 
-    // Simulating a loading delay with useEffect
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false); // Set loading to false after 2 seconds (simulating content loading)
-        }, 2000);
-
-        // Cleanup function to clear the timer if the component unmounts
-        return () => clearTimeout(timer);
+        // Check if JWT token exists in local storage
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (jwtToken) {
+            setIsLoggedIn(true);
+        }
     }, []);
 
     return (
-        <MovieProvider>
-            <Router>
-                <HeaderMovie />
-                <SearchComp />
-                {isLoading ? (
-                    <div style={{ textAlign: 'center', padding: '20px' }}>
-                        <p>Loading...</p>
-                    </div>
-                ) : (
-                    <Routes>
-                        <Route path="/" element={<TilesCards />} />
-                        <Route path="/movies" element={<TilesCards />} />
-                        <Route path="/register" element={<Register/>} />
-                        <Route path="/login" element={<Login/>} />
-                        <Route path="/movie/:id" element={<MovieDetailContainer />} />
-                    </Routes>
-                )}
-                <FooterComponent />
-            </Router>
-        </MovieProvider>
+        <AuthenticationProvider>
+            <MovieProvider>
+                <Router>
+                    <HeaderMovie isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
+                    {isLoggedIn && <SearchComp/> }
+                    {isLoading ? (
+                        <div style={{textAlign: 'center', padding: '20px'}}>
+                            <p>Loading...</p>
+                        </div>
+                    ) : (
+                        <Routes>
+                            <Route path="/" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
+                            <Route path="/movies" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
+                            <Route path="/movies" element={isLoggedIn ? <Register/> : <HomePage/>}/>
+                            <Route path="/login" element={isLoggedIn ? <Login/> : <Login/>}/>
+                            <Route path="/profile" element={isLoggedIn ? <Profile/> : <Login/>}/>
+                            <Route path="/movie/:id" element={isLoggedIn ? <MovieDetailContainer/> : <HomePage/>}/>
+                        </Routes>
+                    )}
+                    <FooterComponent/>
+                </Router>
+            </MovieProvider>
+        </AuthenticationProvider>
     );
 }
 
