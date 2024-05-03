@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import {jwtDecode} from "jwt-decode";
+import axios from "axios";
 const AuthenticationContext = createContext();
 export const useAuthentication = () => {
     return useContext(AuthenticationContext);
@@ -8,22 +9,49 @@ export const useAuthentication = () => {
 export const AuthenticationProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
+    const [userAuthorities, setUserAuthorities] = useState();
+
 
     useEffect(() => {
-        // Check if JWT token exists in local storage
+        // Nodig om te kijken of JWT token bestaat in local storage
         const jwtToken = localStorage.getItem('jwtToken');
         if (jwtToken) {
             setIsLoggedIn(true);
-            // Decode the token to extract user information
+            //Decodeer token om user / gebruikersnaam informatie te decrypten
             const decodedToken = jwtDecode(jwtToken);
 
-            // Extract the username from the decoded token
+            // Extract gebruikersnaam van token;
             const { sub: username } = decodedToken;
 
-            // Set the username state
+            // Zet de gebruikersnaam state
             setUsername(username);
         }
     }, []);
+
+    useEffect(() => {
+        const fetchUserAuthorities = async () => {
+            try {
+                if (username) {
+                    const response = await axios.get(`http://localhost:8080/users/${username}/authorities`);
+                    const authorities = response.data.map(authority => {
+                        //Nodig om gebruikersrol te definieren
+                        if (authority.authority === 'ROLE_USER') {
+                            return 'Gebruiker';
+                        } else if (authority.authority === 'ROLE_ADMIN') {
+                            return 'ADMIN';
+                        } else {
+                            return authority.authority;
+                        }
+                    });
+                    setUserAuthorities(authorities);
+                }
+            } catch (error) {
+                console.error('Error fetching user authorities:', error);
+            }
+        };
+
+        fetchUserAuthorities();
+    }, [username]);
 
     const handleLogout = () => {
         setIsLoggedIn(false);
@@ -31,7 +59,7 @@ export const AuthenticationProvider = ({ children }) => {
     };
 
     return (
-        <AuthenticationContext.Provider value={{ isLoggedIn, handleLogout, username, setUsername }}>
+        <AuthenticationContext.Provider value={{ isLoggedIn, handleLogout, username, setUsername, userAuthorities }}>
             {children}
         </AuthenticationContext.Provider>
     );
