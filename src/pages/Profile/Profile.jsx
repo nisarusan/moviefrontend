@@ -1,58 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import { useAuthentication } from '../../provider/AuthenticationProvider/AuthenticationProvider.jsx';
-import { useMovieContext } from '../../context/MovieContext.jsx';
-import { jwtDecode } from 'jwt-decode';
 import Avatar from '../../assets/avatar.png';
 
 import './Profile.css';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import TabProfileMenu from "../../component/TabProfileMenu/TabProfileMenu.jsx";
 import ProfileFavorite from "../../component/ProfileFavorite/ProfileFavorite.jsx";
+import ProfileSeen from "../../component/ProfileSeen/ProfileSeen.jsx";
+import ProfileRated from "../../component/ProfileRated/ProfileRated.jsx";
+
 function Profile() {
-    const { isLoggedIn } = useAuthentication();
-    const { username } = useAuthentication();
-    const { userAuthorities } = useAuthentication();
+    const { username, userAuthorities } = useAuthentication();
+
+    const tabs = [
+        { title: 'Rated', component: <ProfileRated /> },
+        { title: 'Favorite', component: <ProfileFavorite /> },
+        { title: 'Seen', component: <ProfileSeen/> },
+    ];
 
     return (
-        <>
-            <div className="wrapper">
-                <section className="profile">
-                    <profile className="profile-wrapper">
-                        <img src={Avatar} alt="Avatar" />
-                        <div className="profile-name">
-                            <h1>{username}</h1>
-                            <p>{userAuthorities}</p>
-                        </div>
-                    </profile>
-                </section>
-                <section className="user">
-                    <div className="user-menu">
-                        <ul>
-                            <li>Favorieten</li>
-                            <li>Gezien</li>
-                            <li>Beoordeeld</li>
-                            <li>Lijst</li>
-                            <li>Profiel</li>
-                        </ul>
+        <div className="wrapper">
+            <section className="profile-section">
+                <div className="profile-wrapper">
+                    <img src={Avatar} alt="Avatar" />
+                    <div className="profile-name">
+                        <h1>{username}</h1>
+                        <p>{userAuthorities}</p>
                     </div>
-                    <div className="user-see">
-                    </div>
-                    <TabProfileMenu />
-                        <div className="weather-content">
-                            <div className="tab-wrapper">
-                                <Routes>
-                                    <Route path="/favorite" element={  <ProfileFavorite />}>
-                                        {/*<ForecastTab coordinates={weatherData.coord}/>*/}
-                                    </Route>
-                                    <Route path="/" exact>
-                                        {/*<TodayTab coordinates={weatherData.coord}/>*/}
-                                    </Route>
-                                </Routes>
-                            </div>
-                        </div>
-                </section>
-            </div>
-        </>
+                </div>
+            </section>
+            <section className="user">
+                {/*<div className="user-menu">*/}
+                {/*</div>*/}
+                {/*<div className="user-see">*/}
+                {/*</div>*/}
+                <div className="tab-wrapper">
+                    <TabProfileMenu tabs={tabs} />
+                </div>
+            </section>
+        </div>
     );
 }
 

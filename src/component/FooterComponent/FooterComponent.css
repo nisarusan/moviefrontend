@@ -1,14 +1,16 @@
 footer {
+    color: #FFFFFF;
     background-color: #000000;
     bottom: 0;
     width: 100%;
+    font-weight: 800;
+
 }
 
 footer .footer-wrapper {
     display: flex;
     justify-content: space-between;
-    align-self: center;
+    align-items: center;
     padding: 2rem 0;
     margin: 0 2rem;
-
 }

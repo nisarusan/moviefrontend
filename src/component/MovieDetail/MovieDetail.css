@@ -4,6 +4,16 @@
     gap: 2rem;
     margin: 0 2rem;
     color: #FFFFFF;
+    padding: 2rem 0;
+}
+.movie-personal {
+    display: flex;
+    gap: 2rem;
+}
+.movie-personal--icns {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .movie-detail .movie-info {
@@ -14,7 +24,27 @@
 
 .movie-img img {
     width: 100%;
+    border-radius: .8rem;
 }
+
+.movie-see:hover {
+    cursor: pointer;
+}
+
+button.movie-add-favorite {
+    display: flex;
+    align-items: center;
+    background-color: #750000;
+    color: #FFFFFF;
+    border: none;
+    font-weight: bold;
+    outline: none;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
 
 @media (min-width: 768px) {
     .movie-detail {

@@ -11,6 +11,10 @@
     color: #FFFFFF;
 }
 
+.movie-title {
+    margin-bottom: 1rem;
+}
+
 .movie-grid--group {
     display: grid;
     color: #FFFFFF;
@@ -26,17 +30,25 @@
     min-width: 200px; /* Set minimum width for grid items */
     /*height: 200px; !* Set height for grid items *!*/
     /*background-color: #f2f2f2;*/
-    padding: 20px;
-    margin-right: 10px; /* Add margin between grid items */
+    padding-right: 2rem;
+    /*margin-right: 2.5rem; !* Add margin between grid items *!*/
     scroll-snap-align: start;
+}
+
+.swiper-slide a {
+    text-decoration: none;
 }
 
 .movie-tiles img {
     width: 100%;
+    border-radius: .4rem;
 }
 .mySwiper {
     z-index: -1;
 }
-@media (min-width: 760px) {
 
+@media(min-width: 720px) {
+    .movie-tiles {
+    padding-right: 3rem;
+    }
 }

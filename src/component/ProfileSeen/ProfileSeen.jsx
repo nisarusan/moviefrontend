@@ -45,10 +45,10 @@ function ProfileSeen() {
     };
     return (
         <div className="profile-seen">
-            <h2>Seen Movies</h2>
+            <h2 className="profile-titles">Seen Movies</h2>
             {seenMovies.length > 0 ? (
-                <div className="seen-movie-list">
-                    <ul className="seen-list">
+                <div className="movies-list">
+                    <ul className="movie-list">
                         {seenMovies.map((movie, index) => (
                             <ProfileMovies key={index} movie={movie} removeSeenMovie={removeSeenMovies} title="Seen" />
                         ))}

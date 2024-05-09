@@ -1,24 +1,32 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './TabProfileMenu.css';
+// TabChooser.js
+import React, { useState } from 'react';
 
-function TabProfileMenu() {
+import './TabProfileMenu.css';
+const TabProfileMenu = ({ tabs }) => {
+    const [activeTab, setActiveTab] = useState(0);
+
+    const handleTabClick = (index) => {
+        setActiveTab(index);
+    };
+
     return (
-        <nav className="tab-bar">
-            <ul>
-                <li>
-                    <NavLink className={({ isActive }) => isActive && 'active'} to="/">
-                        Vandaag
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink className={({ isActive }) => isActive && 'active'} to="/favorite">
-                        Komende week
-                    </NavLink>
-                </li>
-            </ul>
-        </nav>
+        <div>
+            <div className="tabs">
+                {tabs.map((tab, index) => (
+                    <div
+                        key={index}
+                        className={`tab ${index === activeTab ? 'active' : ''}`}
+                        onClick={() => handleTabClick(index)}
+                    >
+                        {tab.title}
+                    </div>
+                ))}
+            </div>
+            <div className="tab-content">
+                {tabs[activeTab].component}
+            </div>
+        </div>
     );
-}
+};
 
 export default TabProfileMenu;

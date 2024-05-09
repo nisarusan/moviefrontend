@@ -49,10 +49,10 @@ function ProfileFavorite() {
 
     return (
         <div className="profile-favorite">
-            <h2>Favorite Movies</h2>
+            <h2 className="profile-titles">Favorite Movies</h2>
             {favoriteMovies.length > 0 ? (
-                <div className="favorite-movies-list">
-                    <ul className="favorite-list">
+                <div className="movies-list">
+                    <ul className="movie-list">
                         {favoriteMovies.map((movie, index) => (
                             <ProfileMovies key={index} movie={movie} removeFavoriteMovie={removeFavoriteMovie} title="Favorieten" />
                         ))}

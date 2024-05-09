@@ -2,6 +2,7 @@ import React from 'react';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import './DesktopLogin.css';
 import {useAuthentication} from "../../provider/AuthenticationProvider/AuthenticationProvider.jsx";
+import {Link} from "react-router-dom";
 
 const DesktopLogin = () => {
     const { isLoggedIn, handleLogout } = useAuthentication();
@@ -11,7 +12,7 @@ const DesktopLogin = () => {
             {isLoggedIn ? (
                 <ProfileDropdown onLogout={handleLogout} />
             ) : (
-                <button className="login-button">Login</button>
+                <Link to="/login"><p className="login-button">Login</p></Link>
             )}
         </div>
     );

@@ -1,6 +1,7 @@
 import HeaderMovie from "../../component/HeaderMovie/HeaderMovie.jsx";
 import FooterComponent from '../../component/FooterComponent/FooterComponent.jsx';
 import './HomePage.css';
+import {Link} from "react-router-dom";
 
 function HomePage() {
 
@@ -12,9 +13,9 @@ function HomePage() {
                     <p className="intro-description">
                         Vind waar je kan streamen naar nieuwe populaire en entertainment films en serie met MovieFlix
                     </p>
-                    <button className="intro-button">
+                    <Link to="/login" className="intro-button">
                         Ontdek films en series
-                    </button>
+                    </Link>
                     <p className="intro-end">Streaming service op MovieFlix</p>
                 </div>
             </section>

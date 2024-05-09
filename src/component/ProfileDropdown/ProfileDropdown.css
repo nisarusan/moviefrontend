@@ -2,17 +2,11 @@
     position: relative;
 }
 
-.avatar {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
 .profile-button {
     margin-left: 8px;
     background-color: transparent;
     border: none;
-    color: #000;
+    color: #FFFFFF;
     cursor: pointer;
 }
 

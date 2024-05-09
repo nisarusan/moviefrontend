@@ -1,0 +1,10 @@
+.login-button {
+    display: none;
+    color: #FFFFFF;
+}
+
+@media (min-width: 720px) {
+   .login-button {
+    display: block;
+   }
+}

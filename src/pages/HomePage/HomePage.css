@@ -6,6 +6,7 @@
     align-items: center;
     flex-direction: column;
     padding: 4rem;
+    color: #FFFFFF;
 }
 
 section .intro-wrapper {
@@ -33,7 +34,12 @@ section .intro-wrapper {
     color: #FFFFFF;
     outline: none;
     border: none;
-    border-radius: .2rem
+    border-radius: .2rem;
+    text-decoration: none;
+}
+
+.intro .intro-button:hover {
+    color: #1a1a1a;
 }
 
 .intro .intro-end {

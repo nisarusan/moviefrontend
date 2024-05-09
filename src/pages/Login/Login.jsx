@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
+import MovieIntro from '../../assets/movies_intro.png';
+import MovieFlixLogo from '../../assets/movieflix_logo-white.svg?react';
+import {Link} from "react-router-dom";
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -55,11 +58,17 @@ function Login() {
     return (
         <section className="login">
             <div className="login-intro">
-                <div className="login-img"></div>
-                <div className="login-description"></div>
+                <div className="login-img">
+    <img src={MovieIntro} alt="Movie Intro" />
+                </div>
+                <div className="login-description">
+                    <h2>Series en Films op MovieFlix</h2>
+                    <p>Zie de laatste films en series op MovieFlix
+                        Maak een account aan en maak een favorieten lijst aan</p>
+                </div>
             </div>
             <div className="login-form">
-                <div className="login-logo"></div>
+                <div className="login-logo"><MovieFlixLogo /></div>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username or Email</label>
@@ -86,6 +95,9 @@ function Login() {
                         />
                     </div>
                     <button type="submit">Login</button>
+                    <p className="form-group--text">
+                        Nieuw?  <Link to="/register" className="form-group--register">Maak dan eerst een account aan</Link>
+                    </p>
                 </form>
             </div>
         </section>

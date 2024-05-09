@@ -1,0 +1,9 @@
+.profile-titles {
+    margin-bottom: 2rem;
+}
+
+.movie-list {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}

@@ -3,8 +3,10 @@ import axios from 'axios';
 import PlusIcon from '../../assets/add-list.svg?react';
 import EyeIcon from '../../assets/see-eye.svg?react';
 import EyeSeen from '../../assets/eyes-seen.svg?react';
+import HeartIcon from '../../assets/heart.svg?react';
 import './MovieDetail.css';
 import {useAuthentication} from "../../provider/AuthenticationProvider/AuthenticationProvider.jsx";
+import Rating from "../Rating/Rating.jsx";
 
 function MovieDetail({movieId}) {
     const [movie, setMovie] = useState(null);
@@ -143,6 +145,7 @@ function MovieDetail({movieId}) {
                         <h1 className="movie-info-title">{movie.title}</h1>
                         <p className="movie-info-slogan">{movie.slogan}</p>
                         <p className="movie-rating">Rating: {rating}</p>
+                        <Rating movieId={movieId} />
                         <div className="movie-meta">
                             <p>Director: {movie.director}</p>
                             <p>Release Date: {getReleaseYear(movie.releaseDate)}</p>
@@ -165,8 +168,8 @@ function MovieDetail({movieId}) {
                                 </span>
                             </div>
                             <button className="movie-add-favorite" onClick={addToFavorites}>
-                                <span className="movie-heart"></span>
-                                {movieIsFavorite ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+                                <HeartIcon />
+                                <p>{movieIsFavorite ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}</p>
                             </button>
                         </div>
                     </div>

@@ -72,10 +72,9 @@
     margin-left: 2px; /* Adjust spacing */
 }
 
-
 @media(max-width: 720px) {
     .desktop-profile {
         display: none; /* Show by default */
-
     }
+
 }

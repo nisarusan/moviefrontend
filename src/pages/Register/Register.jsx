@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './Register.css';
+import MoviesBg from '../../assets/movies_intro_bg.png';
 
 function Register() {
+
+    const [registrationStatus, setRegistrationStatus] = useState('');
     const [formData, setFormData] = useState({
         username: '',
         password: '',
         email: '',
         enabled: true, // assuming 'enabled' is a boolean
-        address: '',
         profileUrl: ''
     });
 
@@ -29,19 +31,18 @@ function Register() {
             });
 
             if (response.ok) {
-                alert('User registered successfully!');
+                setRegistrationStatus('User registered successfully!');
                 // Reset form after successful registration
                 setFormData({
                     username: '',
                     password: '',
                     email: '',
                     enabled: true,
-                    address: '',
                     profileUrl: ''
                 });
             } else {
                 const errorData = await response.json();
-                alert(`Registration failed: ${errorData.message}`);
+                setRegistrationStatus(`Registration failed: ${errorData.message}`);
             }
         } catch (error) {
             console.error('Error registering user:', error);
@@ -52,12 +53,15 @@ function Register() {
     return (
         <section className="register">
             <div className="register-intro">
-                <div className="register-img"></div>
+                <div className="register-img">
+                    <img src={MoviesBg} alt="Movies BG"/>
+                </div>
                 <div className="register-description"></div>
             </div>
             <div className="register-signup">
                 <div className="register-logo"></div>
                 <form onSubmit={handleSubmit}>
+                    {registrationStatus && <div className="registration-feedback">{registrationStatus}</div>}
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
@@ -90,18 +94,6 @@ function Register() {
                             name="email"
                             placeholder="Enter your E-mail"
                             value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="address">Address</label>
-                        <input
-                            type="text"
-                            id="address"
-                            name="address"
-                            placeholder="Enter your address"
-                            value={formData.address}
                             onChange={handleInputChange}
                             required
                         />
