@@ -38,7 +38,7 @@ export default function SliderSwiper(props) {
                                 <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="movie"/>
                                 <div className="movie-description">
                                     <h1>{title}</h1>
-                                    <h1>{release_date.substring(0, 4)}</h1>
+                                    <h1>{(new Date(release_date)).getFullYear()}</h1>
                                     <p>Rating: <span>7.4</span></p>
                                 </div>
                             </article>
