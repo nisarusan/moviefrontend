@@ -12,6 +12,8 @@ import ProfileRated from "../../component/ProfileRated/ProfileRated.jsx";
 function Profile() {
     const { username, userAuthorities } = useAuthentication();
 
+
+    //Tabs Profielpagina
     const tabs = [
         { title: 'Rated', component: <ProfileRated /> },
         { title: 'Favorite', component: <ProfileFavorite /> },
@@ -35,6 +37,7 @@ function Profile() {
                 {/*<div className="user-see">*/}
                 {/*</div>*/}
                 <div className="tab-wrapper">
+                    {/*// Tabs doorgeven naar TabProfileMenu component */}
                     <TabProfileMenu tabs={tabs} />
                 </div>
             </section>

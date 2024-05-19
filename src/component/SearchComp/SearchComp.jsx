@@ -48,7 +48,7 @@ function SearchComp() {
                 name="search"
                 title="search"
                 aria-label="search"
-                placeholder="Search for a movie..."
+                placeholder="Zoek naar een film..."
                 value={searchTerm}
                 onChange={handleInputChange}
                 className={`search-input ${showAutocomplete ? 'autocomplete-visible' : ''}`}

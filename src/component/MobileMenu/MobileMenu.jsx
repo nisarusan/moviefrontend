@@ -6,11 +6,11 @@ const MobileMenu = ({ isLoggedIn }) => {
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
     const toggleProfileDropdown = () => {
-        setShowProfileDropdown(!showProfileDropdown); // Toggle the profile dropdown
+        setShowProfileDropdown(!showProfileDropdown);
     };
 
     const closeProfileDropdown = () => {
-        setShowProfileDropdown(false); // Close the profile dropdown
+        setShowProfileDropdown(false);
     };
 
     return (
@@ -28,11 +28,9 @@ const MobileMenu = ({ isLoggedIn }) => {
                 <li><Link to="/films" onClick={closeProfileDropdown}>Films</Link></li>
                 <li><Link to="/series" onClick={closeProfileDropdown}>Series</Link></li>
 
-                {/* Render profile menu item if user is logged in */}
                 {isLoggedIn && (
                     <li className="profile-menu-item">
                         <div onClick={toggleProfileDropdown}>Profile</div>
-                        {/* Render the profile dropdown when menu is open */}
                         {showProfileDropdown && (
                             <ul className="profile-dropdown">
                                 <li><Link to="/favorites" onClick={closeProfileDropdown}>Favorites</Link></li>
@@ -42,7 +40,6 @@ const MobileMenu = ({ isLoggedIn }) => {
                     </li>
                 )}
 
-                {/* Render login link if user is not logged in */}
                 {!isLoggedIn && (
                     <li><Link to="/login" onClick={closeProfileDropdown}>Login</Link></li>
                 )}

@@ -6,6 +6,8 @@ export const useAuthentication = () => {
     return useContext(AuthenticationContext);
 };
 
+
+//AuthenticationProvider controleert of een gebruiker is ingelogd en of de JWT-token aanwezig is op elke pagina
 export const AuthenticationProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
@@ -34,7 +36,7 @@ export const AuthenticationProvider = ({ children }) => {
                 if (username) {
                     const response = await axios.get(`http://localhost:8080/users/${username}/authorities`);
                     const authorities = response.data.map(authority => {
-                        //Nodig om gebruikersrol te definieren
+                        //Gebruikersrol definieren
                         if (authority.authority === 'ROLE_USER') {
                             return 'Gebruiker';
                         } else if (authority.authority === 'ROLE_ADMIN') {

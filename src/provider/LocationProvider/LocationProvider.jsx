@@ -2,6 +2,8 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 
 const LocationContext = createContext();
 
+
+
 export const LocationProvider = ({ children }) => {
     const [location, setLocation] = useState(window.location);
 

@@ -31,8 +31,8 @@ function Register() {
             });
 
             if (response.ok) {
-                setRegistrationStatus('User registered successfully!');
-                // Reset form after successful registration
+                setRegistrationStatus('Sucessvol geregistreerd');
+                // Reset de form na succesvol login
                 setFormData({
                     username: '',
                     password: '',
@@ -42,11 +42,11 @@ function Register() {
                 });
             } else {
                 const errorData = await response.json();
-                setRegistrationStatus(`Registration failed: ${errorData.message}`);
+                setRegistrationStatus(`Registratie gefaald: ${errorData.message}`);
             }
         } catch (error) {
-            console.error('Error registering user:', error);
-            alert('Registration failed. Please try again.');
+            console.error('Foutmelding registratie gebruiker:', error);
+            alert('Registratie mislukt. Probeer het nog eens!s');
         }
     };
 
@@ -63,12 +63,12 @@ function Register() {
                 <form onSubmit={handleSubmit}>
                     {registrationStatus && <div className="registration-feedback">{registrationStatus}</div>}
                     <div className="form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Gebruikersnaam</label>
                         <input
                             type="text"
                             id="username"
                             name="username"
-                            placeholder="Enter username"
+                            placeholder="Uw gebruikersnaam"
                             value={formData.username}
                             onChange={handleInputChange}
                             required
@@ -92,7 +92,7 @@ function Register() {
                             type="email"
                             id="email"
                             name="email"
-                            placeholder="Enter your E-mail"
+                            placeholder="Uw e-mail"
                             value={formData.email}
                             onChange={handleInputChange}
                             required
@@ -100,11 +100,12 @@ function Register() {
                     </div>
                     <div className="form-group">
                         <label htmlFor="profileUrl">Profile URL</label>
+                        {/* Oplossing hier in toekomst voor vinden voor foto */}
                         <input
                             type="text"
                             id="profileUrl"
                             name="profileUrl"
-                            placeholder="Enter profile URL"
+                            placeholder="Profielfoto verwijzing plaatje"
                             value={formData.profileUrl}
                             onChange={handleInputChange}
                             required

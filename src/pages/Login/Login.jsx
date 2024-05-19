@@ -40,10 +40,10 @@ function Login() {
             if (response.ok) {
                 const { jwt } = await response.json();
 
-                // Store the JWT token in localStorage
+                // Plaats JWT token in localStorage
                 localStorage.setItem('jwtToken', jwt);
 
-                // Redirect to dashboard upon successful login
+                // Verwijs naar profielpagina na succesvol logins
                 window.location.href = '/profile';
             } else {
                 const errorData = await response.json();

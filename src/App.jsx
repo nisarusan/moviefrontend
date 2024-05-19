@@ -15,11 +15,15 @@ import {LocationProvider} from './provider/LocationProvider/LocationProvider.jsx
 import ProfileFavorite from "./component/ProfileFavorite/ProfileFavorite.jsx";
 import ProfileSeen from "./component/ProfileSeen/ProfileSeen.jsx";
 import ProfileRated from "./component/ProfileRated/ProfileRated.jsx";
+import ErrorComponent from "./component/ErrorComponent/ErrorComponent.jsx";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false); // Assuming you have loading state
 
+
+    // Commenting in English and Dutch... mixed up.
+    // For now I will leave it Dutch and English commenting
     const handleLogout = () => {
         // Perform logout actions here (e.g., clear authentication state)
         setIsLoggedIn(false);
@@ -44,7 +48,7 @@ function App() {
                         {isLoggedIn && <SearchComp/>}
                         {isLoading ? (
                             <div style={{textAlign: 'center', padding: '20px'}}>
-                                <p>Loading...</p>
+                                <p>Even geduld is aan het laden...</p>
                             </div>
                         ) : (
                             <Routes>
@@ -55,6 +59,8 @@ function App() {
                                 <Route path="/register" element={isLoggedIn ? <Profile/> : <Register/>}/>
                                 <Route path="/profile/*" element={isLoggedIn ? <Profile/> : <Login/>}/>
                                 <Route path="/movie/:id" element={isLoggedIn ? <MovieDetailContainer/> : <HomePage/>}/>
+                                {/*404 pagina eronder*/}
+                                <Route element={<ErrorComponent />} />
                                 {/*<Route path="/favorite" element={isLoggedIn ? <ProfileFavorite/> : <HomePage/>}/>*/}
                                 {/*<Route path="/seen" element={isLoggedIn ? <ProfileSeen/> : <HomePage/>}/>*/}
                                 {/*<Route path="/rated" element={isLoggedIn ? <ProfileRated /> : <HomePage/>}/>*/}

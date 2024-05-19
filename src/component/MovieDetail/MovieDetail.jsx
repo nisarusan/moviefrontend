@@ -76,7 +76,7 @@ function MovieDetail({movieId}) {
     const addToFavorites = async () => {
         try {
             if (movieIsFavorite) {
-                // If the movie is already a favorite, remove it from favorites
+                // Als de film favoriet is, verwijder uit favorieten ingebouwd.
                 const movieId = [{id: movie.id}];
                 const response = await axios.delete(`http://localhost:8080/users/${username}/favorite-movies`, {
                     data: movieId
@@ -85,7 +85,7 @@ function MovieDetail({movieId}) {
                     console.log('Film is verwijderd uit favorieten!');
                     setMovieIsFavorite(false); // Update state after successfully removing from favorites
                 } else {
-                    console.error(`Failed to remove movie from favorites. Status: ${response.status}`);
+                    console.error(`Het verwijderen van de film uit favorieten is mislukt. Status: ${response.status}`);
                 }
             } else {
                 // If the movie is not a favorite, add it to favorites
@@ -93,20 +93,20 @@ function MovieDetail({movieId}) {
                 const response = await axios.post(`http://localhost:8080/users/${username}/favorite-movies`, favoriteMovies);
                 if (response.status === 200) {
                     console.log('Film is toegevoegd aan favorieten!');
-                    setMovieIsFavorite(true); // Update state after successfully adding to favorites
+                    setMovieIsFavorite(true); // Status bijwerken na succesvol toevoegen aan favorieten
                 } else {
-                    console.error(`Failed to add movie to favorites. Status: ${response.status}`);
+                    console.error(`Toevoegen van de film aan favorieten is mislukt. Status: ${response.status}`);
                 }
             }
         } catch (error) {
-            console.error('Error adding/removing movie to/from favorites:', error);
+            console.error('Fout bij het toevoegen/verwijderen van de film aan/uit favorieten:', error);
         }
     };
 
     const addSeeMovies = async () => {
         try {
             if (movieisSeen) {
-                // If the movie is already a see, remove it from see list
+                // Als de film al gezien is, verwijder deze dan uit de lijst van te bekijken films.
                 const movieId = [{id: movie.id}];
                 const response = await axios.delete(`http://localhost:8080/users/${username}/seen-movies`, {
                     data: movieId
@@ -115,15 +115,15 @@ function MovieDetail({movieId}) {
                     console.log('Film is verwijderd uit gezien lijst!');
                     setMovieSeen(false); // Update state after successfully removing from seen
                 } else {
-                    console.error(`Failed to remove movie from favorites. Status: ${response.status}`);
+                    console.error(`Fout bij het verwijderen van de film uit favorieten. Status: ${response.status}`);
                 }
             } else {
-                // If the movie is not a seen, add it to see list
+                // Als de film nog niet gezien is, voeg deze toe aan de lijst van te bekijken films.
                 const seenMovies = [{id: movie.id}];
                 const response = await axios.post(`http://localhost:8080/users/${username}/seen-movies`, seenMovies);
                 if (response.status === 200) {
                     console.log('Film is toegevoegd aan gezien lijst!');
-                    setMovieSeen(true); // Update state after successfully adding to favorites
+                    setMovieSeen(true); // useState bijwerken na succesvol toevoegen aan favorieten
                 } else {
                     console.error(`Failed to add movie to see list. Status: ${response.status}`);
                 }
@@ -139,6 +139,7 @@ function MovieDetail({movieId}) {
             {movie ? (
                 <>
                     <div className="movie-img">
+                        {/*//Standaard tmdb database images gebruiken */}
                         <img src={`https://image.tmdb.org/t/p/w500/${movie.imageUrl}`} alt={movie.title}/>
                     </div>
                     <div className="movie-info">

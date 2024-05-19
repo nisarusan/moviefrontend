@@ -1,0 +1,19 @@
+
+.movie-description {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: .5rem;
+}
+.movie-add {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.movie-add .movie-add--list {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+

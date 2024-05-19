@@ -4,6 +4,7 @@ import PlusIcon from '../../src/assets/add-list.svg?react';
 import EyeIcon from '../../src/assets/see-eye.svg?react';
 import EyeSeen from '../../src/assets/eyes-seen.svg?react';
 import Heart from '../../src/assets/heart.svg?react';
+import './sliderSwiper.css';
 
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -42,19 +43,19 @@ export default function SliderSwiper(props) {
                                 </div>
                             </article>
                         </Link>
-                                    <div className="movie-add">
+                        <div className="movie-add">
                                         <span className="movie-heart">
-                                            <Heart />
+                                            <Heart/>
                                         </span>
-                                        <div className="movie-add--list">
+                            <div className="movie-add--list">
                                     <span className="movie--add">
-                                        <PlusIcon />
+                                        <PlusIcon/>
                                     </span>
-                                            <span className="movie--see">
-                                                <EyeSeen />
+                                <span className="movie--see">
+                                                <EyeSeen/>
                                     </span>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
                     </SwiperSlide>
                 ))}
             </Swiper>
