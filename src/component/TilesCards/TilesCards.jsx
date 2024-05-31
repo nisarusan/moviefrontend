@@ -13,16 +13,26 @@ import SliderSwiper from "../../helper/sliderSwiper.jsx";
 function TilesCards() {
 
     const [movies, setMovies] = useState([]);
-    async function getMovies() {
-        try {
-            const response = await axios.get('http://localhost:8080/movies');
-            setMovies(response.data);
+
+
+    //UseEffect zodat het 1x laad
+    // Voorheen hele back-end van java werd tientallen x geladen
+    useEffect(() => {
+        async function fetchMovies() {
+            try {
+                const response = await axios.get('http://localhost:8080/movies');
+                setMovies(response.data);
+            } catch (error) {
+                console.error(error);
+            }
         }
-        catch(e) {
-            console.error(e);
-        }
-    }
-    getMovies();
+
+        fetchMovies();
+    }, []);
+
+
+
+
         return (
             <>
                 <section className="movie">

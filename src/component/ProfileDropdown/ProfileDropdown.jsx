@@ -19,7 +19,7 @@ const ProfileDropdown = () => {
             </div>
             {showDropdown && (
                 <div className="dropdown-content">
-                    <a href="/profile">Favorites</a>
+                    <a href="/profile">Mijn profiel</a>
                     {/* Call onLogout function when the button is clicked */}
                     <button onClick={handleLogout}>Log out</button>
                 </div>
