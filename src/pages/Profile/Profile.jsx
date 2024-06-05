@@ -8,6 +8,7 @@ import TabProfileMenu from "../../component/TabProfileMenu/TabProfileMenu.jsx";
 import ProfileFavorite from "../../component/ProfileFavorite/ProfileFavorite.jsx";
 import ProfileSeen from "../../component/ProfileSeen/ProfileSeen.jsx";
 import ProfileRated from "../../component/ProfileRated/ProfileRated.jsx";
+import AddMovieComponent from "../../component/AddMovieComponent/AddMovieComponent.jsx";
 
 function Profile() {
     const { username, userAuthorities } = useAuthentication();
@@ -42,8 +43,12 @@ function Profile() {
                 {/*<div className="user-see">*/}
                 {/*</div>*/}
                 <div className="tab-wrapper">
+                    <Routes>
+                        <Route path="/" element={<TabProfileMenu tabs={tabs} />} />
+                        <Route path="/" element={<AddMovieComponent />} />
+                    </Routes>
                     {/*// Tabs doorgeven naar TabProfileMenu component */}
-                    <TabProfileMenu tabs={tabs} />
+                    {/*<TabProfileMenu tabs={tabs} />*/}
                 </div>
             </section>
         </div>
