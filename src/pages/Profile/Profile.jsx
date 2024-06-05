@@ -45,7 +45,7 @@ function Profile() {
                 <div className="tab-wrapper">
                     <Routes>
                         <Route path="/" element={<TabProfileMenu tabs={tabs} />} />
-                        <Route path="/" element={<AddMovieComponent />} />
+                        <Route path="/add-movie" element={<AddMovieComponent />} />
                     </Routes>
                     {/*// Tabs doorgeven naar TabProfileMenu component */}
                     {/*<TabProfileMenu tabs={tabs} />*/}
