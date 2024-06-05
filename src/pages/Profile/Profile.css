@@ -7,7 +7,8 @@
     background-color: #FFFFFF;
     border-top-left-radius: .2rem;
     border-top-right-radius: .2rem;
-
+    justify-content: space-between;
+    align-items: center;
     padding: 4rem 1rem;
 }
 
@@ -32,6 +33,18 @@
 .tab-wrapper {
     padding: 2rem;
 
+}
+
+.profiel-movie--add {
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    border: none;
+    outline: none;
+    background-color: #750000;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: .75rem;
+    height: 50%;
 }
 
 

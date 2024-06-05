@@ -24,12 +24,17 @@ function Profile() {
         <div className="wrapper">
             <section className="profile-section">
                 <div className="profile-wrapper">
-                    <img src={Avatar} alt="Avatar" />
+                    <img src={Avatar} alt="Avatar"/>
                     <div className="profile-name">
                         <h1>{username}</h1>
                         <p>{userAuthorities}</p>
                     </div>
                 </div>
+                {userAuthorities == 'ADMIN' && (
+                    <div className="profiel-movie--add">
+                        Voeg nieuwe films toe
+                    </div>
+                )}
             </section>
             <section className="user">
                 {/*<div className="user-menu">*/}
