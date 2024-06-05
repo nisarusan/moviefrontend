@@ -28,7 +28,6 @@ function App() {
         // Perform logout actions here (e.g., clear authentication state)
         setIsLoggedIn(false);
         localStorage.removeItem('jwtToken'); // Clear token from localStorage
-        // Additional cleanup tasks if needed
     };
 
     useEffect(() => {
