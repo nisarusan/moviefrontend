@@ -157,7 +157,7 @@ function MovieDetail({movieId}) {
                                 <li key={index} className="movie-genre--title">{genre}</li>
                             ))}
                         </ul>
-                        <h3 className="movie-description">Description</h3>
+                        <h3 className="movie-description">Beschrijving</h3>
                         <p className="movie-description--text">{movie.description}</p>
                         <div className="movie-personal">
                             <div className="movie-personal--icns">

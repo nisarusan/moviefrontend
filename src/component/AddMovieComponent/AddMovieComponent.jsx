@@ -63,7 +63,7 @@ function AddMovieComponent() {
 
     return (
         <div className="add-movie-container">
-            <h2>Add a New Movie</h2>
+            <h2>Voeg een nieuwe film toe</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Title:</label>

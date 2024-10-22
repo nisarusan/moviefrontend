@@ -26,6 +26,13 @@
     color: #B6B6B6;
 }
 
+.profile-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
 .user {
     background-color: #F7F8F9;
 }
@@ -48,3 +55,43 @@
 }
 
 
+
+.profile-wrapper img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-img {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-avatar {
+    display: block;
+    width: 150px; /* Pas de grootte aan naar wens */
+    height: 150px; /* Pas de grootte aan naar wens */
+    border-radius: 50%;
+}
+
+.upload-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Donkere overlay */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile-img:hover .upload-overlay {
+    opacity: 1; /* Toon overlay bij hover */
+}
