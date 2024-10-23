@@ -17,10 +17,13 @@ import 'swiper/css/navigation';
 // import required modules
 import {Navigation} from 'swiper/modules';
 import {Link} from 'react-router-dom';
-import axios from "axios"; // Import Link from react-router-dom
+import axios from "axios";
+import MovieActions from "../component/MovieActions/MovieActions.jsx";
+import {useAuthentication} from "../provider/AuthenticationProvider/AuthenticationProvider.jsx"; // Import Link from react-router-dom
 
 
 export default function SliderSwiper(props) {
+    const {username} = useAuthentication(); // nodig om juiste username te krijgen en films in favorieten te kunnen toevoegen
     const [ratings, setRatings] = useState({});
 
     const fetchAverageRating = async (movieId) => {
@@ -65,19 +68,7 @@ export default function SliderSwiper(props) {
                                 </div>
                             </article>
                         </Link>
-                        <div className="movie-add">
-                                        <span className="movie-heart">
-                                            <Heart/>
-                                        </span>
-                            <div className="movie-add--list">
-                                    <span className="movie--add">
-                                        <PlusIcon/>
-                                    </span>
-                                <span className="movie--see">
-                                                <EyeSeen/>
-                                    </span>
-                            </div>
-                        </div>
+                        <MovieActions movieId={id} username={username} showAsButton={false} />
                     </SwiperSlide>
                 ))}
             </Swiper>
