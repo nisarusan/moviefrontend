@@ -16,6 +16,7 @@ import ProfileFavorite from "./component/ProfileFavorite/ProfileFavorite.jsx";
 import ProfileSeen from "./component/ProfileSeen/ProfileSeen.jsx";
 import ProfileRated from "./component/ProfileRated/ProfileRated.jsx";
 import ErrorComponent from "./component/ErrorComponent/ErrorComponent.jsx";
+import {AvatarProvider} from "./context/AvatarContext.jsx";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,35 +41,38 @@ function App() {
 
     return (
         <AuthenticationProvider>
-            <MovieProvider>
-                <LocationProvider>
-                    <Router>
-                        <HeaderMovie isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
-                        {isLoggedIn && <SearchComp/>}
-                        {isLoading ? (
-                            <div style={{textAlign: 'center', padding: '20px'}}>
-                                <p>Even geduld is aan het laden...</p>
-                            </div>
-                        ) : (
-                            <Routes>
-                                <Route path="/" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
-                                <Route path="/movies" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
-                                <Route path="/movies" element={isLoggedIn ? <Register/> : <HomePage/>}/>
-                                <Route path="/login" element={isLoggedIn ? <Profile/> : <Login/>}/>
-                                <Route path="/register" element={isLoggedIn ? <Profile/> : <Register/>}/>
-                                <Route path="/profile/*" element={isLoggedIn ? <Profile/> : <Login/>}/>
-                                <Route path="/movie/:id" element={isLoggedIn ? <MovieDetailContainer/> : <HomePage/>}/>
-                                {/*404 pagina eronder*/}
-                                <Route element={<ErrorComponent />} />
-                                {/*<Route path="/favorite" element={isLoggedIn ? <ProfileFavorite/> : <HomePage/>}/>*/}
-                                {/*<Route path="/seen" element={isLoggedIn ? <ProfileSeen/> : <HomePage/>}/>*/}
-                                {/*<Route path="/rated" element={isLoggedIn ? <ProfileRated /> : <HomePage/>}/>*/}
-                            </Routes>
-                        )}
-                        <FooterComponent/>
-                    </Router>
-                </LocationProvider>
-            </MovieProvider>
+            <AvatarProvider>
+                <MovieProvider>
+                    <LocationProvider>
+                        <Router>
+                            <HeaderMovie isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
+                            {isLoggedIn && <SearchComp/>}
+                            {isLoading ? (
+                                <div style={{textAlign: 'center', padding: '20px'}}>
+                                    <p>Even geduld is aan het laden...</p>
+                                </div>
+                            ) : (
+                                <Routes>
+                                    <Route path="/" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
+                                    <Route path="/movies" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
+                                    <Route path="/movies" element={isLoggedIn ? <Register/> : <HomePage/>}/>
+                                    <Route path="/login" element={isLoggedIn ? <Profile/> : <Login/>}/>
+                                    <Route path="/register" element={isLoggedIn ? <Profile/> : <Register/>}/>
+                                    <Route path="/profile/*" element={isLoggedIn ? <Profile/> : <Login/>}/>
+                                    <Route path="/movie/:id"
+                                           element={isLoggedIn ? <MovieDetailContainer/> : <HomePage/>}/>
+                                    {/*404 pagina eronder*/}
+                                    <Route element={<ErrorComponent/>}/>
+                                    {/*<Route path="/favorite" element={isLoggedIn ? <ProfileFavorite/> : <HomePage/>}/>*/}
+                                    {/*<Route path="/seen" element={isLoggedIn ? <ProfileSeen/> : <HomePage/>}/>*/}
+                                    {/*<Route path="/rated" element={isLoggedIn ? <ProfileRated /> : <HomePage/>}/>*/}
+                                </Routes>
+                            )}
+                            <FooterComponent/>
+                        </Router>
+                    </LocationProvider>
+                </MovieProvider>
+            </AvatarProvider>
         </AuthenticationProvider>
     );
 }

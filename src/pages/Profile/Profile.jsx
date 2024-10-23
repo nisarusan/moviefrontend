@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import avatarDefault from '../../assets/avatar.png';
 import AddMovieComponent from '../../component/AddMovieComponent/AddMovieComponent.jsx';
@@ -8,12 +8,12 @@ import ProfileSeen from '../../component/ProfileSeen/ProfileSeen.jsx';
 import TabProfileMenu from '../../component/TabProfileMenu/TabProfileMenu.jsx';
 import { useAuthentication } from '../../provider/AuthenticationProvider/AuthenticationProvider.jsx';
 import './Profile.css';
+import {AvatarContext} from "../../context/AvatarContext.jsx";
 
 function Profile() {
     const { username, userAuthorities } = useAuthentication();
     const [showAddMovie, setShowAddMovie] = useState(false);
-    const [avatar, setAvatar] = useState(avatarDefault);
-    const [avatarFile, setAvatarFile] = useState(null);
+    const { avatar, setAvatar } = useContext(AvatarContext); // Haal avatar en setAvatar uit de context
     const [avatarBlob, setAvatarBlob] = useState(null);
     const fileInputRef = useRef(null); // Reference for the hidden file input
 
@@ -53,7 +53,6 @@ function Profile() {
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setAvatarFile(file); // Sla het bestand ook gelijk op
             handleAvatarUpload(file); // Upload het bestand direct
         }
     };
