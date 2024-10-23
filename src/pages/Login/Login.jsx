@@ -1,92 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Login.css';
 import MovieIntro from '../../assets/movies_intro.png';
-import MovieFlixLogo from '../../assets/movieflix_logo-white.svg?react';
-import {Link} from "react-router-dom";
+import Logo from '../../assets/movieflix_logo-white.svg?react';
+import FormInput from '../../component/FormInput/FormInput.jsx';
+import { Link } from 'react-router-dom';
+import { useLogin } from '../../helper/useLogin.js';
 
 function Login() {
-    const [formData, setFormData] = useState({
-        username: '',
-        password: ''
-    });
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            const response = await fetch('http://localhost:8080/authenticate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                const { jwt } = await response.json();
-
-                // Plaats JWT token in localStorage
-                localStorage.setItem('jwtToken', jwt);
-
-                // Verwijs naar profielpagina na succesvol logins
-                window.location.href = '/profile';
-            } else {
-                const errorData = await response.json();
-                alert(`Login failed: ${errorData.message}`);
-            }
-        } catch (error) {
-            console.error('Error logging in:', error);
-            alert('Login failed. Please try again.');
-        }
-    };
+    const { formData, handleInputChange, handleSubmit } = useLogin();
 
     return (
         <section className="login">
             <div className="login-intro">
                 <div className="login-img">
-    <img src={MovieIntro} alt="Movie Intro" />
+                    <img src={MovieIntro} alt="Movie Intro" />
                 </div>
                 <div className="login-description">
                     <h2>Series en Films op MovieFlix</h2>
-                    <p>Zie de laatste films en series op MovieFlix
-                        Maak een account aan en maak een favorieten lijst aan</p>
+                    <p>Zie de laatste films en series op MovieFlix. Maak een account aan en maak een favorietenlijst aan.</p>
                 </div>
             </div>
             <div className="login-form">
-                <div className="login-logo"><MovieFlixLogo /></div>
+                <Logo />
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username or Email</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            placeholder="Enter username or email"
-                            value={formData.username}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="******"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
+                    <FormInput
+                        label="Username or Email"
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleInputChange}
+                        placeholder="Enter username or email"
+                    />
+                    <FormInput
+                        label="Password"
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        placeholder="******"
+                    />
                     <button type="submit">Login</button>
                     <p className="form-group--text">
-                        Nieuw?  <Link to="/register" className="form-group--register">Maak dan eerst een account aan</Link>
+                        Nieuw? <Link to="/register" className="form-group--register">Maak dan eerst een account aan</Link>
                     </p>
                 </form>
             </div>
