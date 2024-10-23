@@ -138,7 +138,7 @@ export default function SliderSwiper(props) {
                 className="mySwiper"
             >
                 {moviesMap.map(({ title, releaseDate: release_date, imageUrl: poster_path, id }) => (
-                    <SwiperSlide key={id}> {/* Use a unique key like id */}
+                    <SwiperSlide key={id}>
                         <Link to={`/movie/${id}`} className="movie-link">
                             <article className="movie-tiles">
                                 <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="movie" />

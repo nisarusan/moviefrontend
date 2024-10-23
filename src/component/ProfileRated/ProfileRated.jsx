@@ -31,7 +31,7 @@ function ProfileRated() {
 
     return (
         <div className="profile-rated">
-            <h2 className="profile-titles">Rated Movies</h2>
+            <h2 className="profile-titles">Beoordeelde Films</h2>
             {ratedMovies.length > 0 ? (
                 <div className="movies-list">
                     <ul className="movie-list">

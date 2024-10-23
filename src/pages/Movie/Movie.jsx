@@ -9,7 +9,7 @@ function Movie() {
     };
 return (
     <>
-            <h2>Movie Search</h2>
+            <h2>Zoek films</h2>
             {selectedMovieId && <SearchComp movieid={selectedMovieId}/>}
     </>
 );
