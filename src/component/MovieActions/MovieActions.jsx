@@ -3,6 +3,7 @@ import PlusIcon from '../../assets/add-list.svg?react';
 import EyeIcon from '../../assets/see-eye.svg?react';
 import EyeSeen from '../../assets/eyes-seen.svg?react';
 import HeartIcon from '../../assets/heart.svg?react';
+import HeartRed from '../../assets/heart-click.svg?react';
 import axios from 'axios';
 
 
@@ -43,11 +44,11 @@ function MovieActions({ movieId, username, showAsButton = true }) {
             </span>
             {!showAsButton ? (
                 <span className="movie-heart" onClick={toggleFavorite}>
-                    <HeartIcon/>
+                    {isFavorite ? <HeartRed/> : <HeartIcon />}
                 </span>
             ) : (
                 <button className="movie-add-favorite" onClick={toggleFavorite}>
-                    <HeartIcon/>
+                    {isFavorite ? <HeartRed/> : <HeartIcon />}
                     <p>{isFavorite ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}</p>
                 </button>
             )}
