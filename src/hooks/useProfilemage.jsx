@@ -5,7 +5,6 @@ import { useAuthentication } from '../provider/AuthenticationProvider/Authentica
 function useProfileImage() {
 
     const { username, userAuthorities } = useAuthentication();
-    // const { user } = useContext(AuthContext);
     const [profileImage, setProfileImage] = useState(null);
     const [download, triggerDownload] = useState(false);
 
