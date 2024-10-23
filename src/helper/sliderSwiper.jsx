@@ -39,7 +39,7 @@ export default function SliderSwiper(props) {
                                 <div className="movie-description">
                                     <h1>{title}</h1>
                                     <h1>{release_date.substring(0, 4)}</h1>
-                                    <p>Rating: <span>7.4</span></p>
+                                    <p>Rating: <span>Niet af nog</span></p>
                                 </div>
                             </article>
                         </Link>
