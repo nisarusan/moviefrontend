@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import {jwtDecode} from "jwt-decode";
 import axios from "axios";
+import HomePage from "../../pages/HomePage/HomePage.jsx";
 const AuthenticationContext = createContext();
 export const useAuthentication = () => {
     return useContext(AuthenticationContext);
@@ -56,8 +57,12 @@ export const AuthenticationProvider = ({ children }) => {
     }, [username]);
 
     const handleLogout = () => {
+        // Perform logout actions here (e.g., clear authentication state)
         setIsLoggedIn(false);
-        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('jwtToken'); // Clear token from localStorage
+
+        // Navigate to the home page
+        window.location.href = '/'; // Replace '/' with the actual URL of your home page
     };
 
     return (

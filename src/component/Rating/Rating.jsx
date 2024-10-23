@@ -67,11 +67,11 @@ function Rating({ movieId }) {
 
     return (
         <div className="rating-container">
-            <h2>Rate this movie:</h2>
+            <h2>Beoordeel deze film:</h2>
             <div className="stars-container">
                 {renderStars()}
             </div>
-            <p>Average Rating: {averageRating.toFixed(1)}</p>
+            <p>Gemiddelde Rating: {averageRating.toFixed(1)}</p>
         </div>
     );
 }

@@ -20,7 +20,7 @@ function SearchComp() {
             const movies = response.data;
 
             const filteredResults = movies.filter((movie) =>
-                movie.title.toLowerCase().includes(value.toLowerCase())
+                movie.title && movie.title.toLowerCase().includes(value.toLowerCase())
             );
 
             const limitedResults = filteredResults.slice(0, 8);

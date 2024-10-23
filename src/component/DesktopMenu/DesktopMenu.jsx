@@ -15,18 +15,18 @@ function DesktopMenu({ isLoggedIn, handleLogout }) {
         <>
             <nav className="main-menu">
                 <ul className="menu">
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/genre">Genre</Link>
-                    </li>
-                    <li>
-                        <Link to="/films">Films</Link>
-                    </li>
-                    <li>
-                        <Link to="/series">Series</Link>
-                    </li>
+                    {/*<li>*/}
+                    {/*    <Link to="/">Home</Link>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*    <Link to="/genre">Genre</Link>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*    <Link to="/films">Films</Link>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*    <Link to="/series">Series</Link>*/}
+                    {/*</li>*/}
                 </ul>
             </nav>
             <div className="desktop-profile">
