@@ -15,7 +15,7 @@ function ErrorComponent() {
                         <p>
                             Je kan hier blijven chillen of weggaan!
                         </p>
-                        <button className="error-button">
+                        <button type="button" className="error-button">
                             Ga terug
                         </button>
                     </div>

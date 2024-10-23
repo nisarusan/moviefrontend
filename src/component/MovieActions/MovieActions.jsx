@@ -47,7 +47,7 @@ function MovieActions({ movieId, username, showAsButton = true }) {
                     {isFavorite ? <HeartRed/> : <HeartIcon />}
                 </span>
             ) : (
-                <button className="movie-add-favorite" onClick={toggleFavorite}>
+                <button type="button" className="movie-add-favorite" onClick={toggleFavorite}>
                     {isFavorite ? <HeartRed/> : <HeartIcon />}
                     <p>{isFavorite ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}</p>
                 </button>

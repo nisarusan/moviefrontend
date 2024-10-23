@@ -16,7 +16,7 @@ const ProfileDropdown = () => {
         <div className="profile-dropdown-container">
             <div className="avatar" onClick={toggleDropdown}>
                 <img src={avatar} alt="User Avatar" />
-                <button className="profile-button">Profile</button>
+                <button type="button" className="profile-button">Profile</button>
                 {showDropdown ? <div className="arrow-up"></div> : <div className="arrow-down"></div>}
             </div>
             {showDropdown && (

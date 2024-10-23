@@ -16,9 +16,9 @@ function Profile() {
     const { avatar, setAvatar } = useContext(AvatarContext); // Avatar uit de context
 
     const tabs = [
-        { title: 'Rated', component: <ProfileRated /> },
+        { title: 'Beoordeelde films', component: <ProfileRated /> },
         { title: 'Favorite', component: <ProfileFavorite /> },
-        { title: 'Seen', component: <ProfileSeen /> },
+        { title: 'Gezien', component: <ProfileSeen /> },
     ];
 
     const handleAddMovieClick = () => {
