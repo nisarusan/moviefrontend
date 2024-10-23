@@ -38,7 +38,7 @@ function Profile() {
                         <p>{userAuthorities}</p>
                     </div>
                 </div>
-                {userAuthorities === "ADMIN" && (
+                {userAuthorities == "ADMIN" && (
                     <div className="profiel-movie--add" onClick={handleAddMovieClick}>
                         Voeg nieuwe films toe
                     </div>
