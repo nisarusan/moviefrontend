@@ -10,16 +10,6 @@ function Login() {
         password: ''
     });
 
-    // useEffect(() => {
-    //     // Check if a JWT token exists in localStorage
-    //     const jwtToken = localStorage.getItem('jwtToken');
-    //
-    //     if (jwtToken) {
-    //         // Redirect to dashboard if token exists
-    //         window.location.href = '/profile';
-    //     }
-    // }, []); // Empty dependency array ensures this effect runs only once on component mount
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
