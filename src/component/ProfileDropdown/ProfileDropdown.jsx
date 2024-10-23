@@ -5,9 +5,9 @@ import {AvatarContext} from "../../context/AvatarContext.jsx";
 
 const ProfileDropdown = () => {
     const [showDropdown, setShowDropdown] = useState(false);
-    const { avatar } = useContext(AvatarContext);
-    const { username } = useAuthentication();
-    const { isLoggedIn, handleLogout } = useAuthentication();
+    const {avatar} = useContext(AvatarContext);
+    const {username} = useAuthentication();
+    const {isLoggedIn, handleLogout} = useAuthentication();
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
@@ -15,7 +15,9 @@ const ProfileDropdown = () => {
     return (
         <div className="profile-dropdown-container">
             <div className="avatar" onClick={toggleDropdown}>
-                <img src={avatar} alt="User Avatar" />
+                <div class="avatar-image">
+                    <img src={avatar} alt="User Avatar"/>
+                </div>
                 <button type="button" className="profile-button">Profile</button>
                 {showDropdown ? <div className="arrow-up"></div> : <div className="arrow-down"></div>}
             </div>

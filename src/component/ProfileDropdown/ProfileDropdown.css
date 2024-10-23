@@ -33,3 +33,18 @@
     background-color: transparent;
     cursor: pointer;
 }
+
+
+.avatar {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+

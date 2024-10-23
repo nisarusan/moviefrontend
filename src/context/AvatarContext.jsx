@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import avatarDefault from '../assets/avatar.png';
-import { useAuthentication } from '../provider/AuthenticationProvider/AuthenticationProvider.jsx'; // Zorg ervoor dat dit pad correct is
+import { useAuthentication } from '../provider/AuthenticationProvider/AuthenticationProvider.jsx';
 
 export const AvatarContext = createContext();
 
@@ -10,10 +10,13 @@ export const AvatarProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const controller = new AbortController(); // Maak een AbortController aan
+        const signal = controller.signal;
+
         const fetchAvatar = async () => {
             if (username) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/images/download/${username}`);
+                    const response = await fetch(`http://localhost:8080/api/images/download/${username}`, { signal });
                     if (response.ok) {
                         const blob = await response.blob();
                         const avatarUrl = URL.createObjectURL(blob);
@@ -24,8 +27,12 @@ export const AvatarProvider = ({ children }) => {
                         setAvatar(avatarDefault);
                     }
                 } catch (error) {
-                    console.error('Error fetching avatar:', error);
-                    setAvatar(avatarDefault); // Gebruik default avatar bij fout
+                    if (error.name === 'AbortError') {
+                        console.log('Avatar fetch aborted');
+                    } else {
+                        console.error('Error fetching avatar:', error);
+                        setAvatar(avatarDefault); // Gebruik default avatar bij fout
+                    }
                 } finally {
                     setLoading(false); // Zet loading state uit na het laden
                 }
@@ -36,7 +43,12 @@ export const AvatarProvider = ({ children }) => {
         };
 
         fetchAvatar();
-    }, [username]); // Fetch avatar wanneer username beschikbaar is
+
+        // Cleanup functie voor wanneer de component unmount
+        return () => {
+            controller.abort(); // Annuleer het fetch-verzoek als de component wordt ontladen
+        };
+    }, [username]);
 
     return (
         <AvatarContext.Provider value={{ avatar, setAvatar, loading }}>
