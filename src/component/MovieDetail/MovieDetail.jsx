@@ -42,7 +42,7 @@ function MovieDetail({ movieId }) {
                         <h1 className="movie-info-title">{movie.title}</h1>
                         <p className="movie-info-slogan">{movie.slogan}</p>
                         <p className="movie-rating">Rating: {movie.rating}</p>
-                        <Rating movieId={movieId} />
+                        <Rating movieId={movieId}/>
                         <div className="movie-meta">
                             <p>Director: {movie.director}</p>
                             <p>Release Date: {getReleaseYear(movie.releaseDate)}</p>
@@ -50,13 +50,13 @@ function MovieDetail({ movieId }) {
                         <h2 className="movie-genre">Genres</h2>
                         <ul className="movie-genre--list">
                             {movie.genres.map((genre, index) => (
-                                <li key={index} className="movie-genre--title">{genre}</li>
+                                <li key={index} className="movie-genre--title">{genre.name}</li>
                             ))}
                         </ul>
                         <h3 className="movie-description">Beschrijving</h3>
                         <p className="movie-description--text">{movie.description}</p>
                         <div className="movie-personal">
-                            <MovieActions movieId={movie.id} />
+                            <MovieActions movieId={movie.id}/>
                         </div>
                     </div>
                 </>

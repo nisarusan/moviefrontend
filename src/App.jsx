@@ -18,6 +18,7 @@ import ProfileRated from "./component/ProfileRated/ProfileRated.jsx";
 import ErrorComponent from "./component/ErrorComponent/ErrorComponent.jsx";
 import {AvatarProvider} from "./context/AvatarContext.jsx";
 import {FavoritesProvider} from "./context/FavoriteContext.jsx";
+import MovieRecommendations from "./component/MovieRecommendations/MovieRecommendations.jsx";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,6 +62,7 @@ function App() {
                                         <Route path="/login" element={isLoggedIn ? <Profile/> : <Login/>}/>
                                         <Route path="/register" element={isLoggedIn ? <Profile/> : <Register/>}/>
                                         <Route path="/profile/*" element={isLoggedIn ? <Profile/> : <Login/>}/>
+                                        <Route path="/recommend" element={isLoggedIn ? <MovieRecommendations/> : <Login/>}/>
                                         <Route path="/movie/:id"
                                                element={isLoggedIn ? <MovieDetailContainer/> : <HomePage/>}/>
                                         {/*404 pagina eronder*/}
