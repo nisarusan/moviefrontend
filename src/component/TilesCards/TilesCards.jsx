@@ -2,6 +2,7 @@ import './TilesCards.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SliderSwiper from "../../helper/sliderSwiper.jsx";
+import MovieList from "../MovieList/Movielist.jsx";
 
 function TilesCards() {
     const [movies, setMovies] = useState([]);
@@ -122,6 +123,8 @@ function TilesCards() {
                 </div>
 
                 <SliderSwiper data={filteredMovies} />
+                <MovieList data={filteredMovies} />
+
             </section>
         </>
     );

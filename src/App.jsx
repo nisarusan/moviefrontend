@@ -66,7 +66,7 @@ function App() {
                                         <Route path="/movie/:id"
                                                element={isLoggedIn ? <MovieDetailContainer/> : <HomePage/>}/>
                                         {/*404 pagina eronder*/}
-                                        <Route element={<ErrorComponent/>}/>
+                                        <Route path="*" element={<ErrorComponent/>}/>
                                         {/*<Route path="/favorite" element={isLoggedIn ? <ProfileFavorite/> : <HomePage/>}/>*/}
                                         {/*<Route path="/seen" element={isLoggedIn ? <ProfileSeen/> : <HomePage/>}/>*/}
                                         {/*<Route path="/rated" element={isLoggedIn ? <ProfileRated /> : <HomePage/>}/>*/}

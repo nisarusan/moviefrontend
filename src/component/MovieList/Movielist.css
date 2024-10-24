@@ -1,0 +1,46 @@
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+.movie-grid--group {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(6, 1fr); /* Force 6 columns */
+    width: 100%; /* Ensure it takes full width */
+    margin: 0 auto;
+}
+.movie-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.movie-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.movie-description {
+    text-align: center;
+}
+
+.movie-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.movie-grid--group {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    gap: 1rem;
+    justify-content: space-between; /* Evenly distribute space */
+}
+
+.movie-tiles {
+    flex-basis: calc(16.66% - 1rem); /* Set each item to be 1/6th of the container minus the gap */
+    margin-bottom: 1rem;
+}

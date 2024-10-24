@@ -37,6 +37,23 @@ export default function SliderSwiper(props) {
         }
     };
 
+    //functie om de sterren te renderen, style in react gelijk gebruiken. Style in module noemen ze dat..
+    const renderStars = (rating) => {
+        const totalStars = 5;
+        const filledStars = Math.round(rating); // Round to nearest whole number
+        const stars = [];
+
+        for (let i = 1; i <= totalStars; i++) {
+            if (i <= filledStars) {
+                stars.push(<span key={i} style={{ color: '#FFD700' }}>&#9733;</span>); // Filled star (★)
+            } else {
+                stars.push(<span key={i}>&#9734;</span>); // Empty star (☆)
+            }
+        }
+
+        return stars;
+    };
+
     useEffect(() => {
         props.data.forEach(({ id }) => {
             fetchAverageRating(id);
@@ -63,7 +80,9 @@ export default function SliderSwiper(props) {
                                     <h1>{title}</h1>
                                     <h1>{release_date ? release_date.substring(0, 4) : 'N/A'}</h1>
                                     {ratings[id] > 0 && (
-                                        <p>Beoordeling: <span>{ratings[id].toFixed(1)}</span></p>
+                                        <div className="rating-stars">
+                                            {renderStars(ratings[id])}
+                                        </div>
                                     )}
                                 </div>
                             </article>
