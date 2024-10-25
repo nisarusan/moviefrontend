@@ -12,7 +12,7 @@ function TilesCards() {
         genre: '',
         duration: 0,
         rating: 0,
-        newest: false
+        newest: true
     });
 
     // Fetch all movies once on component load
@@ -92,8 +92,24 @@ function TilesCards() {
                     <select name="genre" onChange={handleFilterChange}>
                         <option value="">All Genres</option>
                         <option value="Action">Action</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Animation">Animation</option>
                         <option value="Comedy">Comedy</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Documentary">Documentary</option>
                         <option value="Drama">Drama</option>
+                        <option value="Family">Family</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="History">History</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Music">Music</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="TV Movie">TV Movie</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="War">War</option>
+                        <option value="Western">Western</option>
                         {/* Add more genres */}
                     </select>
 
@@ -116,7 +132,7 @@ function TilesCards() {
                         <input
                             type="checkbox"
                             name="newest"
-                            onChange={() => setFilters(prev => ({ ...prev, newest: !prev.newest }))}
+                            onChange={() => setFilters(prev => ({...prev, newest: !prev.newest}))}
                         />
                         Newest First
                     </label>

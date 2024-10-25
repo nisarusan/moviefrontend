@@ -1,0 +1,4 @@
+.movie-add-favorite,
+.movie-see, .movie-heart  {
+    cursor: pointer;
+}

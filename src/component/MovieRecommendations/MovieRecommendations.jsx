@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SliderSwiper from '../../helper/sliderSwiper.jsx';  // Import the Swiper component to display movies
 import { useAuthentication } from '../../provider/AuthenticationProvider/AuthenticationProvider.jsx';
+import './MovieRecommendations.css'; // Import CSS for styling
 
 export default function MovieRecommendations() {
     const { username } = useAuthentication();  // Get the username from context
@@ -45,12 +46,14 @@ export default function MovieRecommendations() {
     }, [username]);
 
     return (
-        <div>
-            <h2>Recommended Movies for You</h2>
+        <div className="recommendation-section">
+            <h2 className="recommendation-title">Films aanbevolen voor jou</h2>
             {recommendations.length > 0 ? (
-                <SliderSwiper data={recommendations} uniqueKey="recommendation" />
+                <div className="recommendation-content">
+                    <SliderSwiper data={recommendations} uniqueKey="recommendation" />
+                </div>
             ) : (
-                <p>Loading recommendations...</p>
+                <p className="loading-text">Aan het laden...</p>
             )}
         </div>
     );

@@ -67,7 +67,7 @@ export default function SliderSwiper(props, {uniqueKey}) {
 
             768: {
                 slidesPerView: 6,
-                spaceBetween: -20
+                spaceBetween: 20
             },
         }}      className={`mySwiper-${uniqueKey}`}
             >
