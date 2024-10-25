@@ -19,6 +19,7 @@ import ErrorComponent from "./component/ErrorComponent/ErrorComponent.jsx";
 import {AvatarProvider} from "./context/AvatarContext.jsx";
 import {FavoritesProvider} from "./context/FavoriteContext.jsx";
 import MovieRecommendations from "./component/MovieRecommendations/MovieRecommendations.jsx";
+import MovieList from "./component/MovieList/Movielist.jsx";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,6 +59,7 @@ function App() {
                                     <Routes>
                                         <Route path="/" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
                                         <Route path="/movies" element={isLoggedIn ? <TilesCards/> : <HomePage/>}/>
+                                        <Route path="/movieslist" element={isLoggedIn ? <MovieList/> : <HomePage/>}/>
                                         <Route path="/movies" element={isLoggedIn ? <Register/> : <HomePage/>}/>
                                         <Route path="/login" element={isLoggedIn ? <Profile/> : <Login/>}/>
                                         <Route path="/register" element={isLoggedIn ? <Profile/> : <Register/>}/>
