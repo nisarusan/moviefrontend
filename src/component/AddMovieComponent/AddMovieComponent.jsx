@@ -15,7 +15,7 @@ function AddMovieComponent() {
     });
 
     const [genreInput, setGenreInput] = useState('');
-
+    const token = localStorage.getItem('jwtToken');
     const handleChange = (e) => {
         const { name, value } = e.target;
         setMovie({ ...movie, [name]: value });
@@ -40,7 +40,12 @@ function AddMovieComponent() {
         };
 
         try {
-            const response = await axios.post('http://localhost:8080/movie', movieData);
+            const response = await axios.post('http://localhost:8080/movie', movieData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
             if (response.status === 200 || response.status === 201) {
                 // Reset movie object
                 setMovie({
@@ -66,7 +71,7 @@ function AddMovieComponent() {
             <h2>Voeg een nieuwe film toe</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Title:</label>
+                    <label>Titel:</label>
                     <input type="text" name="title" value={movie.title} onChange={handleChange} maxLength="255" required />
                 </div>
                 <div className="form-group">
@@ -97,11 +102,11 @@ function AddMovieComponent() {
                 {/*    </div>*/}
                 {/*</div>*/}
                 <div className="form-group">
-                    <label>Description:</label>
+                    <label>Beschrijving:</label>
                     <textarea name="description" value={movie.description} onChange={handleChange} maxLength="1000" required />
                 </div>
                 <div className="form-group">
-                    <label>Duration (minutes):</label>
+                    <label>Duration (minuten):</label>
                     <input type="number" name="duration" value={movie.duration} onChange={handleChange} required />
                 </div>
                 <button type="submit">Add Movie</button>

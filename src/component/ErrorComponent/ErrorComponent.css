@@ -46,6 +46,11 @@
 
 }
 
+a, a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
 @media (min-width: 720px) {
 
     .error {

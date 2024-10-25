@@ -12,7 +12,11 @@ function ProfileSeen() {
     useEffect(() => {
         const fetchSeenMovies = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/users/${username}/seen-movies`);
+                const response = await axios.get(`http://localhost:8080/users/${username}/seen-movies`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                    }
+                });
                 if (response.status === 200) {
                     setSeenMovies(response.data);
                 } else {
@@ -31,7 +35,10 @@ function ProfileSeen() {
     const removeSeenMovies = async (movieId) => {
         try {
             const response = await axios.delete(`http://localhost:8080/users/${username}/seen-movies`, {
-                data: [{ id: movieId }]
+                data: [{ id: movieId }],
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                }
             });
             if (response.status === 200) {
                 console.log('Film is verwijderd uit gezien lijst!');

@@ -1,19 +1,23 @@
-
-.movie-description {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    margin-bottom: .5rem;
-}
-.movie-add {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+/* Style for each movie tile */
+.movie-tiles {
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.movie-add .movie-add--list {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.movie-tiles:hover {
+    transform: scale(1.05);
 }
 
+.movie-tiles img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.movie-tiles:hover img {
+    transform: scale(1.02);
+}
+
+.swiper-slide {
+    margin: 15px;
+}

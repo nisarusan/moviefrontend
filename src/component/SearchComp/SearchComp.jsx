@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import './SearchComp.css';
-import { useMovieContext } from '../../context/MovieContext.jsx';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for React Router v6
+import {useMovieContext} from '../../context/MovieContext.jsx';
+import {useNavigate} from 'react-router-dom'; // Import useNavigate for React Router v6
 
 function SearchComp() {
-    const { handleMovieSelection } = useMovieContext();
+    const {handleMovieSelection} = useMovieContext();
     const [searchTerm, setSearchTerm] = useState('');
     const [autocompleteResults, setAutocompleteResults] = useState([]);
     const [showAutocomplete, setShowAutocomplete] = useState(false);
     const navigate = useNavigate(); // Use useNavigate for navigation
 
     const handleInputChange = async (event) => {
-        const { value } = event.currentTarget;
+        const {value} = event.currentTarget;
         setSearchTerm(value);
 
         try {
-            const response = await axios.get(`http://localhost:8080/movies?query=${value}`);
+            const response = await axios.get(`http://localhost:8080/movies?query=${value}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                }
+            });
             const movies = response.data;
 
             const filteredResults = movies.filter((movie) =>

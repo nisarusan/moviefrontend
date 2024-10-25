@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ProfileFavorite.css';
 import { useAuthentication } from "../../provider/AuthenticationProvider/AuthenticationProvider.jsx";
-import MovieDetail from '../../component/MovieDetail/MovieDetail.jsx'; // Assuming MovieDetail component is in a separate file
+import MovieDetail from '../../component/MovieDetail/MovieDetail.jsx';
 import FavoriteMovie from "../ProfileMovies/ProfileMovies.jsx";
-import ProfileMovies from "../ProfileMovies/ProfileMovies.jsx"; // Import the FavoriteMovie component
+import ProfileMovies from "../ProfileMovies/ProfileMovies.jsx";
 
 function ProfileFavorite() {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
@@ -14,7 +14,11 @@ function ProfileFavorite() {
     useEffect(() => {
         const fetchFavoriteMovies = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/users/${username}/favorite-movies`);
+                const response = await axios.get(`http://localhost:8080/users/${username}/favorite-movies`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                    }
+                });
                 if (response.status === 200) {
                     console.log(response.data);
                     setFavoriteMovies(response.data);
@@ -34,7 +38,11 @@ function ProfileFavorite() {
     const removeFavoriteMovie = async (movieId) => {
         try {
             const response = await axios.delete(`http://localhost:8080/users/${username}/favorite-movies`, {
-                data: [{ id: movieId }]
+                data: [{ id: movieId }],
+                headers: {
+                    Authorization:
+                        `Bearer ${localStorage.getItem('jwtToken')}`
+                }
             });
             if (response.status === 200) {
                 console.log('Film is verwijderd uit favorieten!');
@@ -59,7 +67,7 @@ function ProfileFavorite() {
                     </ul>
                 </div>
             ) : (
-                <p>No favorite movies yet.</p>
+                <p>Geen favoriete films</p>
             )}
         </div>
     );

@@ -12,11 +12,16 @@ function Rating({ movieId }) {
 
     useEffect(() => {
         fetchAverageRating();
+        checkIfUserRated();
     }, []);
 
     const fetchAverageRating = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/movie/${movieId}/average-rating`);
+            const response = await axios.get(`http://localhost:8080/movie/${movieId}/average-rating`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                }
+            });
             if (response.status === 200) {
                 setAverageRating(response.data);
             } else {
@@ -27,16 +32,35 @@ function Rating({ movieId }) {
         }
     };
 
+    const checkIfUserRated = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/${username}/has-rated/${movieId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                }
+            });
+            if (response.status === 200 && response.data.rated) {
+                setIsRated(true);
+                setRating(response.data.rating); // stel de gegeven beoordeling van de gebruiker in
+            }
+        } catch (error) {
+            console.error('Error checking if user rated:', error);
+        }
+    };
+
     const handleRating = async (selectedRating) => {
         if (isRated) return;
 
         setRating(selectedRating);
 
         try {
-            const response = await axios.post(`http://localhost:8080/${username}/rate-movie/${movieId}?rating=${selectedRating}`);
+            const response = await axios.post(`http://localhost:8080/${username}/rate-movie/${movieId}?rating=${selectedRating}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                }
+            });
             if (response.status === 200) {
                 setIsRated(true);
-                console.log('Rating submitted successfully.');
                 fetchAverageRating();
             } else {
                 console.error('Failed to submit rating.');
@@ -47,6 +71,24 @@ function Rating({ movieId }) {
     };
 
     const renderStars = () => {
+        if (isRated) {
+            // Niet-interactieve sterren als de gebruiker al heeft beoordeeld
+            return (
+                <div className="stars-container">
+                    {[...Array(5)].map((_, i) => (
+                        <span
+                            key={i + 1}
+                            className={`star ${i + 1 <= rating ? 'selected' : ''}`}
+                            style={{ cursor: 'default' }}
+                        >
+                            &#9733;
+                        </span>
+                    ))}
+                </div>
+            );
+        }
+
+        // Interactieve sterren als de gebruiker nog niet heeft beoordeeld
         const stars = [];
         for (let i = 1; i <= 5; i++) {
             stars.push(
@@ -56,7 +98,7 @@ function Rating({ movieId }) {
                     onClick={() => handleRating(i)}
                     onMouseEnter={() => setHoverRating(i)}
                     onMouseLeave={() => setHoverRating(0)}
-                    disabled={isRated}
+                    style={{ cursor: 'pointer' }}
                 >
                     &#9733;
                 </span>
@@ -72,6 +114,7 @@ function Rating({ movieId }) {
                 {renderStars()}
             </div>
             <p>Gemiddelde Rating: {averageRating.toFixed(1)}</p>
+            {isRated && <p>Je hebt deze film al beoordeeld.</p>}
         </div>
     );
 }

@@ -11,7 +11,11 @@ function ProfileRated() {
     useEffect(() => {
         const fetchRatedMovies = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/${username}/rated-movies`);
+                const response = await axios.get(`http://localhost:8080/${username}/rated-movies`, {
+                    headers: {
+                        Authorization: `Bearer: ${localStorage.getItem('jwtToken')}`
+                    }
+                });
                 console.log(response.data);
                 if (response.status === 200) {
                     setRatedMovies(response.data);

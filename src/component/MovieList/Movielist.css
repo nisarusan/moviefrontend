@@ -1,0 +1,28 @@
+.movie-lijst {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.movie-item {
+    /*border: 1px solid #ccc;*/
+    padding: 10px;
+    /*border-radius: 10px;*/
+    /*background-color: rgba(255, 255, 255, 0.4);*/
+    transition: transform 0.3s ease;
+}
+
+.movie-item:hover {
+    transform: scale(1.05);
+}
+
+.movie-description {
+    color: #FFFFFF;
+
+}
+
+.movie-link img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

@@ -5,7 +5,6 @@ import { useAuthentication } from '../provider/AuthenticationProvider/Authentica
 function useProfileImage() {
 
     const { username, userAuthorities } = useAuthentication();
-    // const { user } = useContext(AuthContext);
     const [profileImage, setProfileImage] = useState(null);
     const [download, triggerDownload] = useState(false);
 
@@ -13,7 +12,7 @@ function useProfileImage() {
     useEffect(() => {
         async function getImage() {
             try {
-                const token = localStorage.getItem("token")
+                const token = localStorage.getItem("jwtToken")
                 const response = await axios.get(`http://localhost:8080/image/${username.username}`, {
                     responseType: 'arraybuffer',
                     headers: {
