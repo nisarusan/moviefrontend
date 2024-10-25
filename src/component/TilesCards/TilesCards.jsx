@@ -21,8 +21,7 @@ function TilesCards() {
             try {
                 const response = await axios.get('http://localhost:8080/movies');
                 setMovies(response.data);
-                setFilteredMovies(response.data); // Set initial movies
-                // Fetch average ratings for each movie
+                setFilteredMovies(response.data);
                 response.data.forEach(movie => fetchAverageRating(movie.id));
             } catch (error) {
                 console.error(error);
@@ -43,7 +42,6 @@ function TilesCards() {
         }
     };
 
-    // Handle filtering whenever filters change
     useEffect(() => {
         let filtered = movies;
 
@@ -73,7 +71,6 @@ function TilesCards() {
         setFilteredMovies(filtered);
     }, [filters, movies, ratings]);
 
-    // Handle changes in filter inputs
     const handleFilterChange = (event) => {
         const { name, value } = event.target;
         setFilters(prev => ({
@@ -85,9 +82,6 @@ function TilesCards() {
     return (
         <>
             <section className="movie">
-                <h1 className="movie-title">Trending films</h1>
-
-                {/* Filter inputs */}
                 <div className="filters">
                     <select name="genre" onChange={handleFilterChange}>
                         <option value="">All Genres</option>
@@ -127,19 +121,11 @@ function TilesCards() {
                         step="0.1"
                         onChange={handleFilterChange}
                     />
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="newest"
-                            onChange={() => setFilters(prev => ({...prev, newest: !prev.newest}))}
-                        />
-                        Newest First
-                    </label>
                 </div>
-
-                <SliderSwiper data={filteredMovies} />
-                <MovieList data={filteredMovies} />
+                <h1 className="movie-title">Nieuwste films</h1>
+                <SliderSwiper data={filteredMovies}/>
+                <h1 className="movie-title">Alle films</h1>
+                <MovieList data={filteredMovies}/>
 
             </section>
         </>

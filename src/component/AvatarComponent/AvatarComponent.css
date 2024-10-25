@@ -19,7 +19,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Donkere overlay */
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
     display: flex;
     justify-content: center;
@@ -30,6 +30,23 @@
     cursor: pointer;
 }
 
-.profile-img:hover .upload-overlay {
-    opacity: 1; /* Toon overlay bij hover */
+.upload-overlay:hover {
+    opacity: 1;
+}
+.profile-img-download {
+    display: inline-block;
+    padding: 10px 20px;
+    color: orange;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.profile-img-download:active {
+    box-shadow: none;
 }

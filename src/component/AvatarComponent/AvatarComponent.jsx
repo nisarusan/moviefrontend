@@ -4,7 +4,8 @@ import './AvatarComponent.css';
 
 function AvatarComponent({ avatar, setAvatar, username }) {
     const fileInputRef = useRef(null);
-    const [downloadUrl, setDownloadUrl] = useState(null); // Store the blob URL
+    const downloadLinkRef = useRef(null); // Separate ref for download link
+    const [downloadUrl, setDownloadUrl] = useState(null); // Store the download URL
 
     useEffect(() => {
         fetchAvatar(); // Fetch avatar when component mounts
@@ -16,10 +17,12 @@ function AvatarComponent({ avatar, setAvatar, username }) {
             const response = await fetch(`http://localhost:8080/api/images/download/${username}`);
             if (response.ok) {
                 const blob = await response.blob();
-                setAvatar(URL.createObjectURL(blob)); // Set the avatar from the blob
+                const imageUrl = URL.createObjectURL(blob);
+                setAvatar(imageUrl); // Set the avatar from the blob
+                setDownloadUrl(imageUrl); // Set download URL
             } else {
                 console.error('Failed to fetch avatar');
-                setAvatar(avatarDefault); // Fall back to default avatar
+                setAvatar(avatarDefault); // Fallback to default avatar
             }
         } catch (error) {
             console.error('Error fetching avatar:', error);
@@ -44,7 +47,7 @@ function AvatarComponent({ avatar, setAvatar, username }) {
 
         const allowedTypes = ['image/jpeg', 'image/png'];
         if (!allowedTypes.includes(file.type)) {
-            alert('Alleen JPG en PNG is toegestaan');
+            alert('Only JPG and PNG formats are allowed');
             return;
         }
 
@@ -58,7 +61,9 @@ function AvatarComponent({ avatar, setAvatar, username }) {
                 body: formData,
             });
             if (response.ok) {
-                setAvatar(URL.createObjectURL(file)); // Use the file object to create an image URL
+                const imageUrl = URL.createObjectURL(file);
+                setAvatar(imageUrl); // Use the file object to create an image URL
+                setDownloadUrl(imageUrl); // Set the download URL
             } else {
                 console.error('Failed to upload avatar');
             }
@@ -67,25 +72,43 @@ function AvatarComponent({ avatar, setAvatar, username }) {
         }
     };
 
-    // Download the current avatar
+    // Trigger download of the current avatar
     const handleAvatarDownload = () => {
-        if (avatar) {
-            const blob = new Blob([avatar], { type: 'image/png' });
-            const downloadLink = URL.createObjectURL(blob);
-            setDownloadUrl(downloadLink); // Set the download URL
+        if (downloadUrl) {
+            downloadLinkRef.current.click(); // Programmatically trigger the download
         }
     };
 
     return (
         <div className="profile-img">
-            <img src={avatar || avatarDefault} alt="Avatar" className="profile-avatar" onClick={handleImageClick} />
-            <div className="upload-overlay" onClick={handleImageClick}>Upload</div>
-            <div className="profile-img-download" onClick={handleAvatarDownload}>Download avatar</div>
+            <img
+                src={avatar || avatarDefault}
+                alt="Avatar"
+                className="profile-avatar"
+                onClick={handleImageClick}
+            />
+            <div className="upload-overlay" onClick={handleImageClick}>
+                Upload
+            </div>
             {downloadUrl && (
-                <a href={downloadUrl} download={`${username}-avatar.png`} style={{ display: 'none' }} ref={fileInputRef}>
+                <div className="profile-img-download" onClick={handleAvatarDownload}>
+                    Download avatar
+                </div>
+            )}
+
+
+            {downloadUrl && (
+                <a
+                    href={downloadUrl}
+                    download={`${username}-avatar.png`}
+                    style={{ display: 'none' }}
+                    ref={downloadLinkRef}
+                >
                     Download
                 </a>
             )}
+
+            {/* Hidden input for file upload */}
             <input
                 type="file"
                 accept="image/jpeg,image/png"

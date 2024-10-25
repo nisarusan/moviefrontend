@@ -18,18 +18,17 @@
 .movie-grid--group {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusts dynamically based on screen size */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-auto-rows: auto;
     margin: 0 auto;
 }
 
 .movie-tiles {
     flex: 0 0 auto;
-    min-width: 200px; /* Set minimum width for grid items */
+    min-width: 200px;
     /*height: 200px; !* Set height for grid items *!*/
     /*background-color: #f2f2f2;*/
     padding-right: 2rem;
-    /*margin-right: 2.5rem; !* Add margin between grid items *!*/
     scroll-snap-align: start;
 }
 
@@ -103,8 +102,18 @@
 }
 
 
-@media(min-width: 720px) {
-    .movie-tiles {
-    padding-right: 3rem;
+@media (max-width: 768px) {
+    .movie-grid--group {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filters select, .filters input, .filters button {
+        width: 100%;
     }
 }

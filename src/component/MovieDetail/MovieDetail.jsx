@@ -9,7 +9,6 @@ function MovieDetail({movieId}) {
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
-        //Haal filmgegevens op, dit werkte niet goed voorheen nu correctie
         const fetchMovieDetails = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/movie/${movieId}`);
@@ -66,7 +65,12 @@ function MovieDetail({movieId}) {
                     <p>Film laden...</p>
                 )}
             </div>
-            <MovieRecommendations/>
+            {movie && (
+                <MovieRecommendations
+                    currentMovieGenres={movie.genres.map(genre => genre.name)}
+                    currentMovieId={movie.id}
+                />
+            )}
         </>
     );
 }

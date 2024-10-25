@@ -4,7 +4,7 @@ import SliderSwiper from '../../helper/sliderSwiper.jsx';  // Import the Swiper 
 import { useAuthentication } from '../../provider/AuthenticationProvider/AuthenticationProvider.jsx';
 import './MovieRecommendations.css'; // Import CSS for styling
 
-export default function MovieRecommendations() {
+export default function MovieRecommendations({ currentMovieGenres }) {
     const { username } = useAuthentication();  // Get the username from context
     const [recommendations, setRecommendations] = useState([]);
 
@@ -15,35 +15,41 @@ export default function MovieRecommendations() {
                 const favoriteResponse = await axios.get(`http://localhost:8080/users/${username}/favorite-movies`);
                 const favoriteMovies = favoriteResponse.data;
 
-                // Extract genres from favorite movies
-                const favoriteGenres = new Set();
-                favoriteMovies.forEach(movie => {
-                    movie.genres.forEach(genre => favoriteGenres.add(genre.name));
-                });
+                // Voeg de genres van de favoriete en huidige film samen
+                const combinedGenres = new Set(currentMovieGenres);
+                if (favoriteMovies.length > 0) {
+                    favoriteMovies.forEach(movie => {
+                        movie.genres.forEach(genre => combinedGenres.add(genre.name));
+                    });
+                }
 
-                // Fetch movies based on favorite genres
-                const genreList = Array.from(favoriteGenres).join(',');
-                const genreResponse = await axios.get(`http://localhost:8080/movies-by-genre`, {
-                    params: { genre: genreList }
-                });
-                const genreMovies = genreResponse.data;
+                // Zet genres om naar een string voor de query
+                const genreList = Array.from(combinedGenres).join(',');
 
-                // Filter out already favorited movies from genre-based results
-                const genreBasedRecommendations = genreMovies.filter(
-                    movie => !favoriteMovies.some(favMovie => favMovie.id === movie.id)
-                );
+                if (genreList) {
+                    // Fetch movies based on combined genres
+                    const genreResponse = await axios.get(`http://localhost:8080/movies-by-genre`, {
+                        params: { genre: genreList }
+                    });
+                    const genreMovies = genreResponse.data;
 
-                // Combine both favorite movies and genre-based recommendations
-                const combinedRecommendations = [...favoriteMovies, ...genreBasedRecommendations];
+                    // Filter out already favorited movies
+                    const genreBasedRecommendations = genreMovies.filter(
+                        movie => !favoriteMovies.some(favMovie => favMovie.id === movie.id)
+                    );
 
-                setRecommendations(combinedRecommendations);  // Set the final recommendations
+                    // Combine both favorite movies and genre-based recommendations
+                    const combinedRecommendations = [...favoriteMovies, ...genreBasedRecommendations];
+
+                    setRecommendations(combinedRecommendations);  // Set the final recommendations
+                }
             } catch (error) {
                 console.error('Error fetching recommendations:', error);
             }
         };
 
         fetchRecommendations();
-    }, [username]);
+    }, [username, currentMovieGenres]);
 
     return (
         <div className="recommendation-section">
@@ -53,7 +59,7 @@ export default function MovieRecommendations() {
                     <SliderSwiper data={recommendations} uniqueKey="recommendation" />
                 </div>
             ) : (
-                <p className="loading-text">Aan het laden...</p>
+                <p className="loading-text">Geen aanbeveling..</p>
             )}
         </div>
     );
