@@ -82,15 +82,11 @@ export default function SliderSwiper(props, {uniqueKey}) {
                                 <div className="movie-description">
                                     <h1>{title}</h1>
                                     <h1>{release_date ? release_date.substring(0, 4) : 'N/A'}</h1>
-<<<<<<< HEAD
-                                    <p>Rating: <span>Hier moet nog iets komen</span></p>
-=======
                                     {ratings[id] > 0 && (
                                         <div className="rating-stars">
                                             {renderStars(ratings[id])}
                                         </div>
                                     )}
->>>>>>> dev
                                 </div>
                             </article>
                         </Link>
