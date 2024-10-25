@@ -15,7 +15,7 @@ function AddMovieComponent() {
     });
 
     const [genreInput, setGenreInput] = useState('');
-
+    const token = localStorage.getItem('jwtToken');
     const handleChange = (e) => {
         const { name, value } = e.target;
         setMovie({ ...movie, [name]: value });
@@ -40,7 +40,12 @@ function AddMovieComponent() {
         };
 
         try {
-            const response = await axios.post('http://localhost:8080/movie', movieData);
+            const response = await axios.post('http://localhost:8080/movie', movieData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
             if (response.status === 200 || response.status === 201) {
                 // Reset movie object
                 setMovie({

@@ -10,7 +10,12 @@ export default function MovieList() {
     useEffect(() => {
         async function fetchMovies() {
             try {
-                const response = await axios.get('http://localhost:8080/movies');
+                const token = localStorage.getItem('jwtToken');
+                const response = await axios.get('http://localhost:8080/movies', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,  // Voeg hier het token toe
+                    }
+                });
                 setMovies(response.data);
             } catch (error) {
                 console.error('Error fetching movies:', error);

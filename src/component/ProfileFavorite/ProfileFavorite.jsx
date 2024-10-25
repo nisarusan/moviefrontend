@@ -14,7 +14,11 @@ function ProfileFavorite() {
     useEffect(() => {
         const fetchFavoriteMovies = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/users/${username}/favorite-movies`);
+                const response = await axios.get(`http://localhost:8080/users/${username}/favorite-movies`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                    }
+                });
                 if (response.status === 200) {
                     console.log(response.data);
                     setFavoriteMovies(response.data);
@@ -34,7 +38,11 @@ function ProfileFavorite() {
     const removeFavoriteMovie = async (movieId) => {
         try {
             const response = await axios.delete(`http://localhost:8080/users/${username}/favorite-movies`, {
-                data: [{ id: movieId }]
+                data: [{ id: movieId }],
+                headers: {
+                    Authorization:
+                        `Bearer ${localStorage.getItem('jwtToken')}`
+                }
             });
             if (response.status === 200) {
                 console.log('Film is verwijderd uit favorieten!');

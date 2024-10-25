@@ -12,7 +12,7 @@ function useProfileImage() {
     useEffect(() => {
         async function getImage() {
             try {
-                const token = localStorage.getItem("token")
+                const token = localStorage.getItem("jwtToken")
                 const response = await axios.get(`http://localhost:8080/image/${username.username}`, {
                     responseType: 'arraybuffer',
                     headers: {

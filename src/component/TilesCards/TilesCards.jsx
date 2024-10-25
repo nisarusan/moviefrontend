@@ -19,7 +19,11 @@ function TilesCards() {
     useEffect(() => {
         async function fetchMovies() {
             try {
-                const response = await axios.get('http://localhost:8080/movies');
+                const response = await axios.get('http://localhost:8080/movies', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                    }
+                });
                 setMovies(response.data);
                 setFilteredMovies(response.data);
                 response.data.forEach(movie => fetchAverageRating(movie.id));
@@ -33,7 +37,11 @@ function TilesCards() {
     // Function to fetch the average rating for a movie
     const fetchAverageRating = async (movieId) => {
         try {
-            const response = await axios.get(`http://localhost:8080/movie/${movieId}/average-rating`);
+            const response = await axios.get(`http://localhost:8080/movie/${movieId}/average-rating`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                }
+            });
             if (response.status === 200) {
                 setRatings(prevRatings => ({ ...prevRatings, [movieId]: response.data }));
             }

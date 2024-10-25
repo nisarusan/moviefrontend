@@ -12,11 +12,19 @@ export const AvatarProvider = ({ children }) => {
     useEffect(() => {
         const controller = new AbortController(); // Maak een AbortController aan
         const signal = controller.signal;
+        const token = localStorage.getItem('jwtToken');
 
         const fetchAvatar = async () => {
             if (username) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/images/download/${username}`, { signal });
+                    const response = await fetch(`http://localhost:8080/api/images/download/${username}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                        signal
+                    });
+
                     if (response.ok) {
                         const blob = await response.blob();
                         const avatarUrl = URL.createObjectURL(blob);
@@ -46,7 +54,7 @@ export const AvatarProvider = ({ children }) => {
 
         // Cleanup functie voor wanneer de component unmount
         return () => {
-            controller.abort(); // Annuleer het fetch-verzoek als de component wordt ontladen
+            controller.abort();
         };
     }, [username]);
 

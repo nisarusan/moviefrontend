@@ -45,7 +45,12 @@ export const AuthenticationProvider = ({ children }) => {
         const fetchUserAuthorities = async () => {
             try {
                 if (username && isMounted) {
-                    const response = await axios.get(`http://localhost:8080/users/${username}/authorities`);
+                    const token = localStorage.getItem('jwtToken');
+                    const response = await axios.get(`http://localhost:8080/users/${username}/authorities`,{
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
                     const authorities = response.data.map(authority => {
                         if (authority.authority === 'ROLE_USER') {
                             return 'Gebruiker';

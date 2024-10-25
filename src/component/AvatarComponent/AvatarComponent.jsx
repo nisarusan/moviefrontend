@@ -6,7 +6,7 @@ function AvatarComponent({ avatar, setAvatar, username }) {
     const fileInputRef = useRef(null);
     const downloadLinkRef = useRef(null); // Separate ref for download link
     const [downloadUrl, setDownloadUrl] = useState(null); // Store the download URL
-
+    const token = localStorage.getItem('jwtToken');
     useEffect(() => {
         fetchAvatar(); // Fetch avatar when component mounts
     }, []);
@@ -14,7 +14,12 @@ function AvatarComponent({ avatar, setAvatar, username }) {
     // Fetch the avatar when the component loads
     const fetchAvatar = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/images/download/${username}`);
+            const response = await fetch(`http://localhost:8080/api/images/download/${username}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }); // trying old method fetch just learning
             if (response.ok) {
                 const blob = await response.blob();
                 const imageUrl = URL.createObjectURL(blob);
@@ -59,6 +64,9 @@ function AvatarComponent({ avatar, setAvatar, username }) {
             const response = await fetch('http://localhost:8080/api/images/upload', {
                 method: 'POST',
                 body: formData,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             if (response.ok) {
                 const imageUrl = URL.createObjectURL(file);

@@ -7,11 +7,15 @@ import MovieRecommendations from "../MovieRecommendations/MovieRecommendations.j
 
 function MovieDetail({movieId}) {
     const [movie, setMovie] = useState(null);
-
+    const token = localStorage.getItem('jwtToken');
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/movie/${movieId}`);
+                const response = await axios.get(`http://localhost:8080/movie/${movieId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 if (response.status === 200) {
                     setMovie(response.data);
                 } else {

@@ -28,9 +28,13 @@ export default function SliderSwiper(props, {uniqueKey}) {
 
     const fetchAverageRating = async (movieId) => {
         try {
-            const response = await axios.get(`http://localhost:8080/movie/${movieId}/average-rating`);
+            const response = await axios.get(`http://localhost:8080/movie/${movieId}/average-rating`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                }
+            });
             if (response.status === 200) {
-                setRatings(prevRatings => ({ ...prevRatings, [movieId]: response.data }));
+                setRatings(prevRatings => ({...prevRatings, [movieId]: response.data}));
             }
         } catch (error) {
             console.error('Error fetching average rating:', error);
@@ -45,7 +49,7 @@ export default function SliderSwiper(props, {uniqueKey}) {
 
         for (let i = 1; i <= totalStars; i++) {
             if (i <= filledStars) {
-                stars.push(<span key={i} style={{ color: '#FFD700' }}>&#9733;</span>); // Filled star (★)
+                stars.push(<span key={i} style={{color: '#FFD700'}}>&#9733;</span>); // Filled star (★)
             } else {
                 stars.push(<span key={i}>&#9734;</span>); // Empty star (☆)
             }
@@ -55,7 +59,7 @@ export default function SliderSwiper(props, {uniqueKey}) {
     };
 
     useEffect(() => {
-        props.data.forEach(({ id }) => {
+        props.data.forEach(({id}) => {
             fetchAverageRating(id);
         });
     }, [props.data]);
@@ -65,32 +69,32 @@ export default function SliderSwiper(props, {uniqueKey}) {
         <>
             <Swiper navigation={true} slidesPerView={3} spaceBetween={120} modules={[Navigation]} breakpoints={{
 
-            768: {
-                slidesPerView: 6,
-                spaceBetween: 20
-            },
-        }}      className={`mySwiper-${uniqueKey}`}
+                768: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                },
+            }} className={`mySwiper-${uniqueKey}`}
             >
-            {moviesMap.map(({title, releaseDate: release_date, imageUrl: poster_path, id}, index) => (
-                <SwiperSlide key={index}>
-                    <Link to={`/movie/${id}`} className="movie-link">
-                        <article className="movie-tiles">
-                            <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="movie"/>
-                            <div className="movie-description">
-                                <h1>{title}</h1>
-                                <h1>{release_date ? release_date.substring(0, 4) : 'N/A'}</h1>
-                                {ratings[id] > 0 && (
-                                    <div className="rating-stars">
-                                        {renderStars(ratings[id])}
-                                    </div>
-                                )}
-                            </div>
-                        </article>
-                    </Link>
-                    <MovieActions movieId={id} username={username} showAsButton={false} />
-                </SwiperSlide>
-            ))}
-        </Swiper>
+                {moviesMap.map(({title, releaseDate: release_date, imageUrl: poster_path, id}, index) => (
+                    <SwiperSlide key={index}>
+                        <Link to={`/movie/${id}`} className="movie-link">
+                            <article className="movie-tiles">
+                                <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="movie"/>
+                                <div className="movie-description">
+                                    <h1>{title}</h1>
+                                    <h1>{release_date ? release_date.substring(0, 4) : 'N/A'}</h1>
+                                    {ratings[id] > 0 && (
+                                        <div className="rating-stars">
+                                            {renderStars(ratings[id])}
+                                        </div>
+                                    )}
+                                </div>
+                            </article>
+                        </Link>
+                        <MovieActions movieId={id} username={username} showAsButton={false}/>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </>
     );
 }
