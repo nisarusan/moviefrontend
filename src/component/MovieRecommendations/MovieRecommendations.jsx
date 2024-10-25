@@ -48,7 +48,7 @@ export default function MovieRecommendations() {
         <div>
             <h2>Recommended Movies for You</h2>
             {recommendations.length > 0 ? (
-                <SliderSwiper data={recommendations} />
+                <SliderSwiper data={recommendations} uniqueKey="recommendation" />
             ) : (
                 <p>Loading recommendations...</p>
             )}

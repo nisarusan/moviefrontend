@@ -15,7 +15,7 @@ const ProfileDropdown = () => {
     return (
         <div className="profile-dropdown-container">
             <div className="avatar" onClick={toggleDropdown}>
-                <div class="avatar-image">
+                <div className="avatar-image">
                     <img src={avatar} alt="User Avatar"/>
                 </div>
                 <button type="button" className="profile-button">Profile</button>

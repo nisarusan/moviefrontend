@@ -22,7 +22,7 @@ import MovieActions from "../component/MovieActions/MovieActions.jsx";
 import {useAuthentication} from "../provider/AuthenticationProvider/AuthenticationProvider.jsx"; // Import Link from react-router-dom
 
 
-export default function SliderSwiper(props) {
+export default function SliderSwiper(props, {uniqueKey}) {
     const {username} = useAuthentication(); // nodig om juiste username te krijgen en films in favorieten te kunnen toevoegen
     const [ratings, setRatings] = useState({});
 
@@ -61,36 +61,36 @@ export default function SliderSwiper(props) {
     }, [props.data]);
 
     const moviesMap = Array.isArray(props.data) ? props.data : [];
-    4
     return (
         <>
             <Swiper navigation={true} slidesPerView={3} spaceBetween={120} modules={[Navigation]} breakpoints={{
 
-                768: {
-                    slidesPerView: 6,
-                    spaceBetween: -20
-                },
-            }} className="mySwiper">
-                {moviesMap.map(({title, releaseDate: release_date, imageUrl: poster_path, id}, index) => (
-                    <SwiperSlide key={index}>
-                        <Link to={`/movie/${id}`} className="movie-link">
-                            <article className="movie-tiles">
-                                <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="movie"/>
-                                <div className="movie-description">
-                                    <h1>{title}</h1>
-                                    <h1>{release_date ? release_date.substring(0, 4) : 'N/A'}</h1>
-                                    {ratings[id] > 0 && (
-                                        <div className="rating-stars">
-                                            {renderStars(ratings[id])}
-                                        </div>
-                                    )}
-                                </div>
-                            </article>
-                        </Link>
-                        <MovieActions movieId={id} username={username} showAsButton={false} />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            768: {
+                slidesPerView: 6,
+                spaceBetween: -20
+            },
+        }}      className={`mySwiper-${uniqueKey}`}
+            >
+            {moviesMap.map(({title, releaseDate: release_date, imageUrl: poster_path, id}, index) => (
+                <SwiperSlide key={index}>
+                    <Link to={`/movie/${id}`} className="movie-link">
+                        <article className="movie-tiles">
+                            <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="movie"/>
+                            <div className="movie-description">
+                                <h1>{title}</h1>
+                                <h1>{release_date ? release_date.substring(0, 4) : 'N/A'}</h1>
+                                {ratings[id] > 0 && (
+                                    <div className="rating-stars">
+                                        {renderStars(ratings[id])}
+                                    </div>
+                                )}
+                            </div>
+                        </article>
+                    </Link>
+                    <MovieActions movieId={id} username={username} showAsButton={false} />
+                </SwiperSlide>
+            ))}
+        </Swiper>
         </>
     );
 }

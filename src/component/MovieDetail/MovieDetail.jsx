@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Rating from "../Rating/Rating.jsx";
 import MovieActions from "../MovieActions/MovieActions.jsx";
 import './MovieDetail.css';
+import MovieRecommendations from "../MovieRecommendations/MovieRecommendations.jsx";
 
-function MovieDetail({ movieId }) {
+function MovieDetail({movieId}) {
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
@@ -32,38 +33,41 @@ function MovieDetail({ movieId }) {
     };
 
     return (
-        <div className="movie-detail">
-            {movie ? (
-                <>
-                    <div className="movie-img">
-                        <img src={`https://image.tmdb.org/t/p/w500/${movie.imageUrl}`} alt={movie.title} />
-                    </div>
-                    <div className="movie-info">
-                        <h1 className="movie-info-title">{movie.title}</h1>
-                        <p className="movie-info-slogan">{movie.slogan}</p>
-                        <p className="movie-rating">Rating: {movie.rating}</p>
-                        <Rating movieId={movieId}/>
-                        <div className="movie-meta">
-                            <p>Director: {movie.director}</p>
-                            <p>Release Date: {getReleaseYear(movie.releaseDate)}</p>
+        <>
+            <div className="movie-detail">
+                {movie ? (
+                    <>
+                        <div className="movie-img">
+                            <img src={`https://image.tmdb.org/t/p/w500/${movie.imageUrl}`} alt={movie.title}/>
                         </div>
-                        <h2 className="movie-genre">Genres</h2>
-                        <ul className="movie-genre--list">
-                            {movie.genres.map((genre, index) => (
-                                <li key={index} className="movie-genre--title">{genre.name}</li>
-                            ))}
-                        </ul>
-                        <h3 className="movie-description">Beschrijving</h3>
-                        <p className="movie-description--text">{movie.description}</p>
-                        <div className="movie-personal">
-                            <MovieActions movieId={movie.id}/>
+                        <div className="movie-info">
+                            <h1 className="movie-info-title">{movie.title}</h1>
+                            <p className="movie-info-slogan">{movie.slogan}</p>
+                            <p className="movie-rating">Rating: {movie.rating}</p>
+                            <Rating movieId={movieId}/>
+                            <div className="movie-meta">
+                                <p>Director: {movie.director}</p>
+                                <p>Release Date: {getReleaseYear(movie.releaseDate)}</p>
+                            </div>
+                            <h2 className="movie-genre">Genres</h2>
+                            <ul className="movie-genre--list">
+                                {movie.genres.map((genre, index) => (
+                                    <li key={index} className="movie-genre--title">{genre.name}</li>
+                                ))}
+                            </ul>
+                            <h3 className="movie-description">Beschrijving</h3>
+                            <p className="movie-description--text">{movie.description}</p>
+                            <div className="movie-personal">
+                                <MovieActions movieId={movie.id}/>
+                            </div>
                         </div>
-                    </div>
-                </>
-            ) : (
-                <p>Film laden...</p>
-            )}
-        </div>
+                    </>
+                ) : (
+                    <p>Film laden...</p>
+                )}
+            </div>
+            <MovieRecommendations/>
+        </>
     );
 }
 
