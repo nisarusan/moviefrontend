@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Login.css';
 import MovieIntro from '../../assets/movies_intro.png';
 import Logo from '../../assets/movieflix_logo-white.svg?react';
@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import { useLogin } from '../../helper/useLogin.js';
 
 function Login() {
-    const { formData, handleInputChange, handleSubmit } = useLogin();
+    const { formData, handleInputChange, handleSubmit, feedbackMessage, feedbackType } = useLogin();
+
 
     return (
         <section className="login">
@@ -46,6 +47,11 @@ function Login() {
                         Nieuw? <Link to="/register" className="form-group--register">Maak dan eerst een account aan</Link>
                     </p>
                 </form>
+                {feedbackMessage && (
+                    <div className={`feedback-message ${feedbackType}`}>
+                        {feedbackMessage}
+                    </div>
+                )}
             </div>
         </section>
     );

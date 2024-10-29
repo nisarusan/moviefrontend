@@ -82,6 +82,21 @@
 
 }
 
+.feedback-message {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.feedback-message.success {
+    background-color: green;
+}
+
+.feedback-message.error-wrong {
+    background-color: red;
+}
+
 @media  (min-width: 720px) {
     .login {
         margin: 0 auto;

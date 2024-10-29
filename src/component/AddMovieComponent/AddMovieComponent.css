@@ -46,3 +46,18 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+.feedback-message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.feedback-message.success {
+    background-color: green;
+}
+
+.feedback-message.error {
+    background-color: red;
+}
