@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="662e3283-aee1-4b2f-9886-863cc604a8eb" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2f7SniOMTy3Iq46S9XWV135FPi3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.sliderSwiper.jsx.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/duck/WebstormProjects/moviefrontend/src/assets&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/component" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.sliderSwiper.jsx">
+    <configuration name="sliderSwiper.jsx" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/helper/sliderSwiper.jsx" working-dir="$PROJECT_DIR$/src/helper">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm dev" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.sliderSwiper.jsx" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="662e3283-aee1-4b2f-9886-863cc604a8eb" name="Changes" comment="" />
+      <created>1713150791724</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713150791724</updated>
+      <workItem from="1713150792748" duration="10667000" />
+      <workItem from="1713234540084" duration="17373000" />
+      <workItem from="1713493966382" duration="44811000" />
+      <workItem from="1714177871034" duration="28911000" />
+      <workItem from="1714787498813" duration="9356000" />
+      <workItem from="1715043625652" duration="8272000" />
+      <workItem from="1715210380023" duration="12149000" />
+      <workItem from="1715644242956" duration="1153000" />
+      <workItem from="1715998983110" duration="1200000" />
+      <workItem from="1716064198906" duration="13915000" />
+      <workItem from="1716088199053" duration="7901000" />
+      <workItem from="1716330891565" duration="264000" />
+      <workItem from="1716344515729" duration="597000" />
+      <workItem from="1716949951876" duration="1511000" />
+      <workItem from="1717067480294" duration="6302000" />
+      <workItem from="1717551025209" duration="15208000" />
+      <workItem from="1721834124672" duration="1932000" />
+      <workItem from="1722525642259" duration="7744000" />
+      <workItem from="1722938993889" duration="529000" />
+      <workItem from="1725492579938" duration="2112000" />
+      <workItem from="1728208023848" duration="7000" />
+      <workItem from="1729302019581" duration="76000" />
+      <workItem from="1729302149213" duration="599000" />
+      <workItem from="1729527278589" duration="57144000" />
+      <workItem from="1730139940553" duration="381000" />
+      <workItem from="1730153116551" duration="12761000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
