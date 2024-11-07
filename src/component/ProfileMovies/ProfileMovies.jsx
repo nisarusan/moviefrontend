@@ -2,12 +2,16 @@ import React from 'react';
 import './ProfileMovies.css';
 import {Link} from "react-router-dom";
 
-function ProfileMovies({ movie, removeFavoriteMovie, title, removeSeenMovie }) {
+function ProfileMovies({ movie, removeFavoriteMovie, title, removeSeenMovie, removeRatedMovie }) {
     const handleRemove = () => {
-        if (removeSeenMovie) {
+        if (removeRatedMovie) {
+            removeRatedMovie(movie.id);
+        } else if (removeSeenMovie) {
             removeSeenMovie(movie.id);
-        } else {
+        } else if (removeFavoriteMovie) {
             removeFavoriteMovie(movie.id);
+        } else {
+            console.warn("Geen verwijderfunctie beschikbaar voor deze film.");
         }
     };
 

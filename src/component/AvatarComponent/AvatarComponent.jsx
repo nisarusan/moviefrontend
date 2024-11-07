@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import avatarDefault from '../../assets/avatar.png';
+import avatarDefault from '../../assets/avatars.png';
 import './AvatarComponent.css';
 
 function AvatarComponent({ avatar, setAvatar, username }) {

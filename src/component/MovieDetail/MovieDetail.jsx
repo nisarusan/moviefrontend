@@ -46,8 +46,9 @@ function MovieDetail({movieId}) {
                         <div className="movie-info">
                             <h1 className="movie-info-title">{movie.title}</h1>
                             <p className="movie-info-slogan">{movie.slogan}</p>
-                            <p className="movie-rating">Rating: {movie.rating}</p>
-                            <Rating movieId={movieId}/>
+                            <p className="movie-rating">{movie.rating}
+                                <Rating movieId={movieId}/>
+                            </p>
                             <div className="movie-meta">
                                 <p>Director: {movie.director}</p>
                                 <p>Release Date: {getReleaseYear(movie.releaseDate)}</p>

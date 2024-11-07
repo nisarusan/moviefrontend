@@ -21,3 +21,9 @@
 .star.rated {
     color: yellow;
 }
+
+.rating-container--sterren {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}

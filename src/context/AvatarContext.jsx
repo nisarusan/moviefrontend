@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import avatarDefault from '../assets/avatar.png';
+import avatarDefault from '../assets/avatars.png';
 import { useAuthentication } from '../provider/AuthenticationProvider/AuthenticationProvider.jsx';
 
 export const AvatarContext = createContext();
@@ -29,9 +29,7 @@ export const AvatarProvider = ({ children }) => {
                         const blob = await response.blob();
                         const avatarUrl = URL.createObjectURL(blob);
                         setAvatar(avatarUrl);
-                        localStorage.setItem('avatar', avatarUrl); // Sla avatar op in localStorage
-                    } else {
-                        console.error('Failed to fetch avatar, using default.');
+                        localStorage.setItem('avatar', avatarUrl); // Sla avatar op in localStorage..
                         setAvatar(avatarDefault);
                     }
                 } catch (error) {

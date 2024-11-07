@@ -9,11 +9,12 @@ function Rating({ movieId }) {
     const [hoverRating, setHoverRating] = useState(0);
     const [isRated, setIsRated] = useState(false);
     const [averageRating, setAverageRating] = useState(0);
+    const [isConfirmed, setIsConfirmed] = useState(false);
 
     useEffect(() => {
         fetchAverageRating();
         checkIfUserRated();
-    }, []);
+    }, [movieId, username]);
 
     const fetchAverageRating = async () => {
         try {
@@ -34,14 +35,21 @@ function Rating({ movieId }) {
 
     const checkIfUserRated = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/${username}/has-rated/${movieId}`, {
+            const response = await axios.get(`http://localhost:8080/${username}/rated-movies`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
                 }
             });
-            if (response.status === 200 && response.data.rated) {
-                setIsRated(true);
-                setRating(response.data.rating); // stel de gegeven beoordeling van de gebruiker in
+
+            if (response.status === 200) {
+                const ratedMovies = response.data;
+                const userHasRated = ratedMovies.some(movie => movie.id === movieId);
+
+                if (userHasRated) {
+                    setIsRated(true);
+                    const userRating = ratedMovies.find(movie => movie.id === movieId).userRating;
+                    setRating(userRating);
+                }
             }
         } catch (error) {
             console.error('Error checking if user rated:', error);
@@ -54,13 +62,18 @@ function Rating({ movieId }) {
         setRating(selectedRating);
 
         try {
-            const response = await axios.post(`http://localhost:8080/${username}/rate-movie/${movieId}?rating=${selectedRating}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+            const response = await axios.post(
+                `http://localhost:8080/${username}/rate-movie/${movieId}?rating=${selectedRating}`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                    }
                 }
-            });
+            );
             if (response.status === 200) {
                 setIsRated(true);
+                setIsConfirmed(true);
                 fetchAverageRating();
             } else {
                 console.error('Failed to submit rating.');
@@ -71,50 +84,34 @@ function Rating({ movieId }) {
     };
 
     const renderStars = () => {
-        if (isRated) {
-            // Niet-interactieve sterren als de gebruiker al heeft beoordeeld
-            return (
-                <div className="stars-container">
-                    {[...Array(5)].map((_, i) => (
+        return (
+            <div className="stars-container">
+                {[...Array(5)].map((_, i) => {
+                    const isFullStar = i + 1 <= Math.round(averageRating); // Volledig gekleurde sterren afgerond op het dichtstbijzijnde geheel getal
+
+                    return (
                         <span
                             key={i + 1}
-                            className={`star ${i + 1 <= rating ? 'selected' : ''}`}
-                            style={{ cursor: 'default' }}
+                            className={`star ${hoverRating >= i + 1 ? 'hover' : ''} ${rating >= i + 1 ? 'selected' : ''}`}
+                            onClick={() => handleRating(i + 1)}
+                            onMouseEnter={() => setHoverRating(i + 1)}
+                            onMouseLeave={() => setHoverRating(0)}
+                            style={{
+                                cursor: 'pointer',
+                                color: isFullStar ? 'yellow' : 'gray'
+                            }}
                         >
-                            &#9733;
-                        </span>
-                    ))}
-                </div>
-            );
-        }
-
-        // Interactieve sterren als de gebruiker nog niet heeft beoordeeld
-        const stars = [];
-        for (let i = 1; i <= 5; i++) {
-            stars.push(
-                <span
-                    key={i}
-                    className={`star ${hoverRating >= i ? 'hover' : ''} ${rating >= i ? 'selected' : ''} ${i <= averageRating ? 'average' : ''}`}
-                    onClick={() => handleRating(i)}
-                    onMouseEnter={() => setHoverRating(i)}
-                    onMouseLeave={() => setHoverRating(0)}
-                    style={{ cursor: 'pointer' }}
-                >
-                    &#9733;
-                </span>
-            );
-        }
-        return stars;
+                        &#9733;
+                    </span>
+                    );
+                })}
+            </div>
+        );
     };
 
     return (
         <div className="rating-container">
-            <h2>Beoordeel deze film:</h2>
-            <div className="stars-container">
-                {renderStars()}
-            </div>
-            <p>Gemiddelde Rating: {averageRating.toFixed(1)}</p>
-            {isRated && <p>Je hebt deze film al beoordeeld.</p>}
+            <p className="rating-container--sterren">Gemiddelde Rating: {averageRating.toFixed(1)} {renderStars()} </p>
         </div>
     );
 }
